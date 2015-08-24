@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:SparkSkin xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
+    xmlns:fb="http://ns.adobe.com/flashbuilder/2009" 
+    alpha.disabledStates="0.5" blendMode="normal" fontSize="16">
+
+    <fx:Metadata>
+	    [HostComponent("spark.material.components.TextInput")]
+    </fx:Metadata> 
+    
+    <fx:Script>
+        <![CDATA[
+			import spark.effects.easing.Sine;
+			
+	        private static const focusExclusions:Array = ["textDisplay"];
+			private static const SINE:Sine = new Sine(.3);
+						
+	        override public function get focusSkinExclusions():Array { return focusExclusions;};
+        ]]>
+    </fx:Script>
+    
+    <s:states>
+        <s:State name="normal"/>
+		<s:State name="normalFocused" stateGroups="focusedStates"/>
+        <s:State name="disabled" stateGroups="disabledStates"/>
+        <s:State name="normalWithPrompt" stateGroups="promptStates"/>
+		<s:State name="normalWithFloatPrompt" stateGroups="floatPromptStates"/>
+		<s:State name="normalFocusedWithFloatPrompt" stateGroups="floatPromptStates,focusedStates"/>
+        <s:State name="disabledWithPrompt" stateGroups="disabledStates,promptStates"/>
+		<s:State name="disabledWithFloatPrompt" stateGroups="disabledStates,floatPromptStates"/>
+    </s:states>
+	
+	<s:transitions>
+		<s:Transition fromState="*" toState="normalFocusedWithFloatPrompt" autoReverse="true">
+			<s:Parallel duration="100">
+				<s:Animate target="{promptDisplay}" easer="{SINE}">
+					<s:SimpleMotionPath property="top"/>
+					<s:SimpleMotionPath property="fontSize"/>					
+				</s:Animate>
+				<s:Animate target="{focusedBorder}" easer="{SINE}">
+					<s:SimpleMotionPath property="right"/>
+				</s:Animate>
+			</s:Parallel>
+		</s:Transition>
+	</s:transitions>
+    
+    <s:RichEditableText id="textDisplay" verticalAlign="middle" widthInChars="10" focusBlendMode="normal"
+              left="1" right="1" top="20" paddingBottom="3" bottom="2" lineThrough.disabledWithFloatPrompt="true"/>
+	
+    <s:Label id="promptDisplay" maxDisplayedLines="1" left="1" cacheAsBitmap="true"
+                verticalAlign="middle" top.normalWithPrompt="20" top.disabledWithPrompt="20" top.floatPromptStates="1" fontStyle="normal"
+                mouseEnabled="false" mouseChildren="false" fontSize.floatPromptStates="12" lineThrough.disabledWithPrompt="true"
+                includeIn="promptStates,floatPromptStates" color="#999999" color.focusedStates="#5380D0"/>
+
+	<s:Line left="0" right="0" bottom="0">
+		<s:stroke>
+			<s:SolidColorStroke id="borderStroke" weight="1" caps="square" color="#999999"/>
+		</s:stroke>
+	</s:Line>
+	
+	<s:Line left="0" right.focusedStates="0" bottom="0" id="focusedBorder">
+		<s:stroke>
+			<s:SolidColorStroke id="focusedBorderStroke" weight="2" caps="square" color="#5380D0"/>
+		</s:stroke>
+	</s:Line>
+	
+</s:SparkSkin>

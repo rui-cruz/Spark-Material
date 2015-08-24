@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:SparkSkin xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		xmlns:mx="library://ns.adobe.com/flex/mx">
+	
+	<fx:Metadata>
+		[HostComponent("spark.material.components.Switch")]
+	</fx:Metadata>
+	
+	<s:states>
+		<s:State name="up" />
+		<s:State name="over" stateGroups="overStates" />
+		<s:State name="down" stateGroups="downStates" />
+		<s:State name="disabled" stateGroups="disabledStates" />
+		<s:State name="upAndSelected" stateGroups="selectedStates" />
+		<s:State name="overAndSelected" stateGroups="overStates, selectedStates" />
+		<s:State name="downAndSelected" stateGroups="downStates, selectedStates" />
+		<s:State name="disabledAndSelected" stateGroups="disabledStates, selectedStates" />
+	</s:states>
+	
+	<s:transitions>
+		<s:Transition fromState="*" toState="upAndSelected" autoReverse="true">
+			<s:Parallel duration="400">
+				<s:Animate target="{slider}">
+					<s:SimpleMotionPath property="x"/>
+				</s:Animate>
+				<s:AnimateColor targets="{[trackFill,sliderFill]}"/>
+			</s:Parallel>
+		</s:Transition>
+		<s:Transition fromState="*" toState="overAndSelected" autoReverse="true">
+			<s:Parallel duration="400">
+				<s:Animate target="{slider}">
+					<s:SimpleMotionPath property="x"/>
+				</s:Animate>
+				<s:AnimateColor targets="{[trackFill,sliderFill]}"/>
+			</s:Parallel>
+		</s:Transition>
+		<s:Transition fromState="*" toState="downAndSelected" autoReverse="true">
+			<s:Parallel duration="400">
+				<s:Animate target="{slider}">
+					<s:SimpleMotionPath property="x"/>
+				</s:Animate>
+				<s:AnimateColor targets="{[trackFill,sliderFill]}"/>
+			</s:Parallel>
+		</s:Transition>
+	</s:transitions>
+	
+	<s:Rect width="30" height="14" alpha="0.5" radiusX="7" left="10" right="10" verticalCenter="0">
+		<s:fill>
+			<s:SolidColor id="trackFill" alpha="1" color="#666666" color.upAndSelected="#ff6868" color.downAndSelected="#ff6868" color.overAndSelected="#ff6868"/>
+		</s:fill>
+		<s:filters>
+			<s:DropShadowFilter alpha=".7" blurX="10" blurY="10" distance="0" inner="true" quality="1"/>
+		</s:filters>
+	</s:Rect>
+	
+	<s:Group id="slider" width="22" height="22" x="0" x.selectedStates="28">
+		<s:Ellipse width="22" height="22">
+			<s:fill>
+				<s:SolidColor id="sliderFill" color="#FFFFFF" color.upAndSelected="#ff6868" color.downAndSelected="#ff6868" color.overAndSelected="#ff6868" color.disabledStates="#cccccc"/>
+			</s:fill>
+			<s:filters>
+				<s:DropShadowFilter alpha="0.5" angle="90" blurX="4.0" blurY="4.0" distance="1" quality="2"/>
+			</s:filters>
+		</s:Ellipse>
+		<s:Group id="inkHolder" verticalCenter="0" horizontalCenter="0" width="0" height="0" />
+	</s:Group>
+	
+</s:SparkSkin>

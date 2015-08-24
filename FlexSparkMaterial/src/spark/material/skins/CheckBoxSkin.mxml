@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:SparkSkin xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
+             xmlns:fb="http://ns.adobe.com/flashbuilder/2009" alpha.disabledStates="0.5">
+	 
+	<fx:Metadata>
+		[HostComponent("spark.material.components.CheckBox")]
+	</fx:Metadata>
+	
+    <fx:Script>
+        <![CDATA[
+            private static const focusExclusions:Array = ["labelDisplay"];
+
+            override public function get focusSkinExclusions():Array { return focusExclusions;};
+        ]]>
+    </fx:Script>
+    
+    <s:states>
+        <s:State name="up" />
+        <s:State name="over" stateGroups="overStates" />
+        <s:State name="down" stateGroups="downStates" />
+        <s:State name="disabled" stateGroups="disabledStates" />
+        <s:State name="upAndSelected" stateGroups="selectedStates" />
+        <s:State name="overAndSelected" stateGroups="overStates, selectedStates" />
+        <s:State name="downAndSelected" stateGroups="downStates, selectedStates" />
+        <s:State name="disabledAndSelected" stateGroups="disabledStates, selectedStates" />
+    </s:states>
+    
+	<s:transitions>
+		<s:Transition fromState="*" toState="upAndSelected" autoReverse="true">
+			<s:Parallel duration="200">
+				<s:Animate target="{check}">
+					<s:SimpleMotionPath property="scaleX"/>
+					<s:SimpleMotionPath property="scaleY"/>					
+				</s:Animate>
+				<s:Animate target="{checkBg}">
+					<s:SimpleMotionPath property="alpha"/>
+				</s:Animate>
+			</s:Parallel>
+		</s:Transition>
+		<s:Transition fromState="*" toState="overAndSelected" autoReverse="true">
+			<s:Parallel duration="200">
+				<s:Animate target="{check}">
+					<s:SimpleMotionPath property="scaleX"/>
+					<s:SimpleMotionPath property="scaleY"/>					
+				</s:Animate>
+				<s:Animate target="{checkBg}">
+					<s:SimpleMotionPath property="alpha"/>
+				</s:Animate>
+			</s:Parallel>
+		</s:Transition>
+		<s:Transition fromState="*" toState="downAndSelected" autoReverse="true">
+			<s:Parallel duration="200">
+				<s:Animate target="{check}">
+					<s:SimpleMotionPath property="scaleX"/>
+					<s:SimpleMotionPath property="scaleY"/>					
+				</s:Animate>
+				<s:Animate target="{checkBg}">
+					<s:SimpleMotionPath property="alpha"/>
+				</s:Animate>
+			</s:Parallel>
+		</s:Transition>
+	</s:transitions>
+	
+    <s:Group verticalCenter="0" width="16" height="16">
+               
+		<s:Rect width="16" height="16" radiusX="1">
+			<s:stroke>
+				<s:SolidColorStroke caps="none" color="#757575" color.disabledStates="#757575" color.upAndSelected="#ff6868" color.downAndSelected="#ff6868" color.overAndSelected="#ff6868"
+									joints="round" miterLimit="4" weight="2"/>
+			</s:stroke>
+			<s:fill>
+				<s:SolidColor id="checkBg" color="#ff6868" color.disabledStates="#757575" alpha="0" alpha.selectedStates="1"/>
+			</s:fill>
+		</s:Rect>
+    	
+		<s:Group id="check" verticalCenter="0" horizontalCenter="0" scaleX="0" scaleY="0" scaleX.selectedStates="1" scaleY.selectedStates="1">
+			<s:Line x="1" y="5" xTo="4" yTo="4">
+				<s:stroke>
+					<s:SolidColorStroke caps="none" color="#FFFFFF" joints="miter" miterLimit="4" weight="2"/>
+				</s:stroke>
+			</s:Line>
+			<s:Line x="4" xTo="9" yFrom="9">
+				<s:stroke>
+					<s:SolidColorStroke caps="none" color="#FFFFFF" joints="miter" miterLimit="4" weight="2"/>
+				</s:stroke>
+			</s:Line>
+		</s:Group>
+		
+		<s:Group id="inkHolder" verticalCenter="0" horizontalCenter="0" width="0" height="0" />
+    </s:Group>
+
+    <s:Label id="labelDisplay"
+             textAlign="start" fontSize="16"
+             verticalAlign="middle" color.disabledStates="#999999"
+             maxDisplayedLines="1" lineThrough.disabledStates="true"
+             left="25" right="0" top="3" bottom="3" verticalCenter="2" />
+
+</s:SparkSkin>
