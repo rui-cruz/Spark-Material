@@ -8,6 +8,8 @@ package spark.material.components
 	import spark.components.RadioButton;
 	import spark.material.skins.RadioButtonSkin;
 	
+	[Style(name="inkColor", type="uint", format="Color", inherit="yes", defaultValue="#ff6868")]
+	
 	public class RadioButton extends spark.components.RadioButton
 	{
 		[SkinPart(required="true")]
@@ -28,7 +30,7 @@ package spark.material.components
 			focusManager.hideFocus();
 			
 			destroyRipples();
-			currentRipple = new InkRipple(0, 0, 40, selected ? 0xff6868 : 0x999999);
+			currentRipple = new InkRipple(0, 0, 40, selected ? getStyle("inkColor") : 0x999999);
 			currentRipple.owner = inkHolder;
 			inkHolder.addElement(currentRipple);
 		}

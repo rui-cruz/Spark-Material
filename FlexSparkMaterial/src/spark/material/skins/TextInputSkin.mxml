@@ -21,12 +21,17 @@
     <s:states>
         <s:State name="normal"/>
 		<s:State name="normalFocused" stateGroups="focusedStates"/>
+		<s:State name="normalFocusedError" stateGroups="focusedStates"/>
         <s:State name="disabled" stateGroups="disabledStates"/>
         <s:State name="normalWithPrompt" stateGroups="promptStates"/>
+		<s:State name="normalWithPromptError" stateGroups="promptStates"/>
 		<s:State name="normalWithFloatPrompt" stateGroups="floatPromptStates"/>
+		<s:State name="normalWithFloatPromptError" stateGroups="floatPromptStates,errorStates"/>
 		<s:State name="normalFocusedWithFloatPrompt" stateGroups="floatPromptStates,focusedStates"/>
+		<s:State name="normalFocusedWithFloatPromptError" stateGroups="floatPromptStates,focusedStates,errorStates"/>
         <s:State name="disabledWithPrompt" stateGroups="disabledStates,promptStates"/>
 		<s:State name="disabledWithFloatPrompt" stateGroups="disabledStates,floatPromptStates"/>
+		<s:State name="disabledWithFloatPromptError" stateGroups="disabledStates,floatPromptStates,errorStates"/>
     </s:states>
 	
 	<s:transitions>
@@ -41,25 +46,36 @@
 				</s:Animate>
 			</s:Parallel>
 		</s:Transition>
+		<s:Transition fromState="*" toState="normalFocusedWithFloatPromptError" autoReverse="true">
+			<s:Parallel duration="100">
+				<s:Animate target="{promptDisplay}" easer="{SINE}">
+					<s:SimpleMotionPath property="top"/>
+					<s:SimpleMotionPath property="fontSize"/>					
+				</s:Animate>
+				<s:Animate target="{focusedBorder}" easer="{SINE}">
+					<s:SimpleMotionPath property="right"/>
+				</s:Animate>
+			</s:Parallel>
+		</s:Transition>
 	</s:transitions>
     
-    <s:RichEditableText id="textDisplay" verticalAlign="middle" widthInChars="10" focusBlendMode="normal"
+    <s:RichEditableText id="textDisplay" verticalAlign="middle" widthInChars="10" fontStyle="normal" color="#000000"
               left="1" right="1" top="20" paddingBottom="3" bottom="2" lineThrough.disabledWithFloatPrompt="true"/>
 	
     <s:Label id="promptDisplay" maxDisplayedLines="1" left="1" cacheAsBitmap="true"
-                verticalAlign="middle" top.normalWithPrompt="20" top.disabledWithPrompt="20" top.floatPromptStates="1" fontStyle="normal"
+                verticalAlign="middle" top.promptStates="20" top.floatPromptStates="1" fontStyle="normal"
                 mouseEnabled="false" mouseChildren="false" fontSize.floatPromptStates="12" lineThrough.disabledWithPrompt="true"
-                includeIn="promptStates,floatPromptStates" color="#999999" color.focusedStates="#5380D0"/>
+                includeIn="promptStates,floatPromptStates" color="#999999" color.focusedStates="#5380D0" color.errorStates="#ff0000"/>
 
 	<s:Line left="0" right="0" bottom="0">
 		<s:stroke>
-			<s:SolidColorStroke id="borderStroke" weight="1" caps="square" color="#999999"/>
+			<s:SolidColorStroke id="borderStroke" weight="1" caps="square" color="#999999" color.normalWithPromptError="#ff0000"/>
 		</s:stroke>
 	</s:Line>
 	
 	<s:Line left="0" right.focusedStates="0" bottom="0" id="focusedBorder">
 		<s:stroke>
-			<s:SolidColorStroke id="focusedBorderStroke" weight="2" caps="square" color="#5380D0"/>
+			<s:SolidColorStroke id="focusedBorderStroke" weight="2" caps="square" color="#5380D0" color.errorStates="#ff0000"/>
 		</s:stroke>
 	</s:Line>
 	
