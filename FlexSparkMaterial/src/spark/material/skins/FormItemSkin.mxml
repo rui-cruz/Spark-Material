@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009" 
+        xmlns:s="library://ns.adobe.com/flex/spark" 
+        xmlns:fb="http://ns.adobe.com/flashbuilder/2009"
+        alpha.disabledStates=".5" creationComplete="init()">  
+    
+    <fx:Metadata>
+        <![CDATA[
+        [HostComponent("spark.components.FormItem")]
+        ]]>
+    </fx:Metadata>
+    
+	<fx:Script fb:purpose="styling">
+		<![CDATA[			
+			public function init():void {
+				requiredToolTip = resourceManager.getString("components","formItemRequired");
+			}
+			
+			private var _requiredToolTip:String;
+			[Bindable]
+			protected function get requiredToolTip():String 
+			{
+				return _requiredToolTip;
+			}
+			
+			protected function set requiredToolTip(value:String):void
+			{
+				_requiredToolTip = value;
+			}
+			
+			override public function setCurrentState(stateName:String, playTransition:Boolean=true):void
+			{
+				super.setCurrentState(stateName, playTransition);
+				invalidateDisplayList();
+			}
+		]]>        
+	</fx:Script>
+	
+    <s:states>
+        <s:State name="normal" />
+        <s:State name="disabled" stateGroups="disabledStates"/> 
+        <s:State name="error" stateGroups="errorStates"/>   
+        <s:State name="required" stateGroups="requiredStates"/> 
+        <s:State name="requiredAndDisabled" stateGroups="requiredStates, disabledStates"/>
+        <s:State name="requiredAndError" stateGroups="requiredStates, errorStates"/>    
+    </s:states>
+	
+	<s:transitions>
+		<s:Transition fromState="*" toState="requiredAndError" autoReverse="true">
+			<s:Parallel>
+				<s:Fade target="{errorTextDisplay}" alphaFrom="0" alphaTo="1"/>
+				<s:Move target="{errorTextDisplay}" yFrom="-5"/>
+			</s:Parallel>
+		</s:Transition>
+	</s:transitions>
+    
+    <s:layout>
+        <s:FormItemLayout>
+            <s:constraintColumns>
+                <!--- The column containing the sequence label. -->
+                <s:ConstraintColumn id="sequenceCol" />
+                <!--- The column containing the FormItem's label. -->
+                <s:ConstraintColumn id="labelCol" />
+                <!--- The column containing the FormItem's content. -->
+                <s:ConstraintColumn id="contentCol" width="100%"/>
+            </s:constraintColumns>         
+            <s:constraintRows>
+                <!--- @private -->
+                <s:ConstraintRow id="row1" baseline="maxAscent:10" height="100%"/>
+				<s:ConstraintRow id="row2" baseline="maxAscent:0" height="12"/>
+            </s:constraintRows>  
+        </s:FormItemLayout>
+    </s:layout>
+    
+    <s:Label id="sequenceLabelDisplay" 
+             fontWeight="bold"
+             left="sequenceCol:10" right="sequenceCol:5"
+             bottom="row1:10" baseline="row1:0"/>
+    
+    <s:Label id="labelDisplay"
+             fontWeight="bold"
+             left="labelCol:0" right="labelCol:5" 
+             bottom="row1:10" baseline="row1:0"/>  
+    
+    <s:Group id="contentGroup" showErrorTip="false" showErrorSkin="true"
+             left="contentCol:0" right="contentCol:1" 
+             baseline="row1:0" bottom="row1:10">
+        <s:layout>
+            <s:VerticalLayout/>
+        </s:layout>
+    </s:Group>
+    
+    <s:Group id="helpContentGroup" excludeFrom="errorStates"
+             fontStyle="italic" fontWeight="normal" color="0x666666"
+             left="contentCol:0" right="contentCol:1"
+             bottom="row2:0" baseline="row1:10"/>
+	
+    <!--- @copy spark.components.FormItem#errorTextDisplay -->
+	<s:Group includeIn="errorStates" 
+			 left="contentCol:0" right="contentCol:1"
+			 bottom="row1:0" baseline="row2:-5" 
+			 clipAndEnableScrolling="true" minHeight="12">
+		<s:RichText paddingTop="0" id="errorTextDisplay" fontWeight="normal" color="0xFE0000" maxDisplayedLines="1" fontSize="11"/>
+	</s:Group>
+        
+ </s:Skin>

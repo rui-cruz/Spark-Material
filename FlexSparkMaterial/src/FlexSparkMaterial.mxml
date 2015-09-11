@@ -8,6 +8,7 @@
 	
 		<fx:Style>
 		@namespace components "spark.material.components.*";
+		@namespace s "library://ns.adobe.com/flex/spark";
 		@font-face {
 			src: url("spark/material/assets/fonts/Roboto.swf");
 			cff:false;
@@ -66,6 +67,11 @@
 			inkColor: #f68f89;
 			color: #f44336;
 		}
+				
+		s|FormItem {
+			skinClass: ClassReference("spark.material.skins.FormItemSkin");
+			showErrorTip: false;
+		}
 	</fx:Style>
 	<fx:Script>
 		<![CDATA[
@@ -74,6 +80,10 @@
 			import spark.material.skins.PanelSkin;
 		]]>
 	</fx:Script>
+	
+	<fx:Declarations>
+		<mx:Validator id="validator" source="{firstName}" property="text"/>
+	</fx:Declarations>
 	
 	<s:Scroller left="0" top="0" bottom="0" right="0">
 		<s:VGroup horizontalAlign="center" verticalAlign="middle" paddingTop="20" paddingBottom="20">			
@@ -95,12 +105,8 @@
 						</s:filters>
 					</s:Rect>					
 					<s:Form top="0" left="0" bottom="0" right="0">
-						<s:FormItem label="TextInput">
-							<s:HGroup gap="20" width="100%">
-								<components:TextInput prompt="First Name" width="50%"/>
-								<components:TextInput prompt="Last Name" width="50%"/>
-							</s:HGroup>
-							<components:TextInput prompt="Complete Name" width="100%"/>
+						<s:FormItem label="TextInput" required="true">						
+							<components:TextInput id="firstName" prompt="First Name" width="50%" change="validator.validate()" focusOut="validator.validate()"/>
 						</s:FormItem>
 						<s:FormItem label="CheckBox">
 							<s:layout>
@@ -128,7 +134,11 @@
 							<components:RadioButton label="Disabled and Selected" enabled="false" selected="true"/>
 						</s:FormItem>
 						<s:FormItem label="Slider">
-							<components:HSlider enabled="{switcher.selected}" minimum="0" maximum="10" width="200" stepSize="0"/>
+							<s:layout>
+								<s:HorizontalLayout gap="20"/>
+							</s:layout>
+							<components:HSlider id="slider" minimum="0" maximum="10" width="200" stepSize="0"/>
+							<components:HSlider enabled="false" value="{slider.value}" minimum="0" maximum="10" width="200" stepSize="0"/>
 						</s:FormItem>
 						<s:FormItem label="Button">
 							<s:layout>

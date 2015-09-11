@@ -14,8 +14,11 @@ package spark.material.components
 		
 	[SkinState("normalFocused")]
 	[SkinState("normalWithFloatPrompt")]
+	[SkinState("normalWithFloatPromptError")]
 	[SkinState("normalFocusedWithFloatPrompt")]
+	[SkinState("normalFocusedWithFloatPromptError")]
 	[SkinState("disabledWithFloatPrompt")]
+	[SkinState("disabledWithFloatPromptError")]
 	
 	[Style(name="nofloat", type="Boolean", inherit="no")]
 	
@@ -30,8 +33,28 @@ package spark.material.components
 			
 			if(!getStyle("skinClass"))
 				setStyle("skinClass", TextInputSkin);
+			
+			setStyle("focusSkin", null);
 		}
 		
+		private var showErrorSkin:Boolean;
+		
+		mx_internal override function updateErrorSkin():void
+		{
+			if(errorString != null && errorString != "" && getStyle("showErrorSkin"))
+			{
+				showErrorSkin = true;
+				if(skin.currentState.indexOf("Error") == -1)
+					skin.currentState += "Error";
+			}
+			else
+			{
+				showErrorSkin = false;
+				if(skin.currentState.indexOf("Error") != -1)
+					skin.currentState = skin.currentState.substr(0, skin.currentState.indexOf("Error"));
+			}
+		}
+				
 		override protected function partAdded(partName:String, instance:Object):void
 		{
 			super.partAdded(partName, instance);
@@ -45,14 +68,7 @@ package spark.material.components
 			if(instance == textDisplay)
 				textDisplay.removeEventListener(FocusEvent.MOUSE_FOCUS_CHANGE, onFocusChange);
 		}
-		
-		override protected function focusInHandler(event:FocusEvent):void
-		{
-			super.focusInHandler(event);
-			
-			focusManager.hideFocus();
-		}
-				
+						
 		protected function onFocusChange(evt:FocusEvent):void
 		{
 			if(skin && skin.contains(evt.relatedObject)) return;
@@ -64,23 +80,27 @@ package spark.material.components
 		
 		override protected function getCurrentSkinState():String
 		{
-			if(focusManager && focusManager.getFocus() == focusManager.findFocusManagerComponent(this))
-			{
-				if(prompt != null && prompt != "")
-					return enabled ? "normalFocusedWithFloatPrompt" : "disabledWithFloatPrompt";
-				
-				return enabled ? "normalFocused" : "disabled";
-			}
+			var skinState:String = enabled ? "normal" : "disabled";
 			
-			if(prompt != null && prompt != "")
+			if(enabled && focusManager && focusManager.getFocus() == focusManager.findFocusManagerComponent(this))
+			{
+				skinState += "Focused";
+				
+				if(prompt != null && prompt != "")
+					skinState += "WithFloatPrompt";
+			}
+			else if(prompt != null && prompt != "")
 			{
 				if(text.length > 0)
-					return enabled ? "normalWithFloatPrompt" : "disabledWithFloatPrompt";
-				
-				return enabled ? "normalWithPrompt" : "disabledWithPrompt";
+					skinState += "WithFloatPrompt";
+				else
+					skinState += "WithPrompt";
 			}
 			
-			return enabled ? "normal" : "disabled";
+			if(showErrorSkin)
+				skinState += "Error";
+			
+			return skinState;
 		}
 	}
 }
