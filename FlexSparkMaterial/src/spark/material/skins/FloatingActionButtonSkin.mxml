@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009" 
+             xmlns:s="library://ns.adobe.com/flex/spark" 
+             xmlns:fb="http://ns.adobe.com/flashbuilder/2009"
+             minWidth="60" minHeight="35" 
+             alpha.disabled="0.5" xmlns:mx="library://ns.adobe.com/flex/mx"
+			 xmlns:skins="spark.material.skins.*">
+	
+	<fx:Metadata>
+		[HostComponent("spark.material.components.FloatingActionButton")]
+	</fx:Metadata>
+    
+
+	<fx:Script>
+		<![CDATA[
+			override public function styleChanged(styleProp:String):void
+			{
+				super.styleChanged(styleProp);
+								
+				if(!styleProp || styleProp == "backgroundColor" || styleProp == "inkColor")
+				{
+					if(getStyle("backgroundColor") != undefined)
+						bgFill.color = getStyle("backgroundColor");
+					
+					if(getStyle("inkColor") != undefined)
+						inkFill.color = getStyle("inkColor");
+					else
+						inkFill.color = bgFill.color;
+				}
+			}
+		]]>
+	</fx:Script>
+	
+    <s:states>
+        <s:State name="up"/>
+        <s:State name="over"/>
+        <s:State name="down"/>
+        <s:State name="disabled" />
+    </s:states>
+    
+	<s:Ellipse width="{width}" height="{height}">
+        <s:fill>
+            <s:SolidColor id="bgFill" color="#fafafa" color.disabled="#dadada"/>
+        </s:fill>
+		<s:filters>
+			<s:DropShadowFilter alpha="0.3" alpha.down=".5" angle="90" blurX="4" blurY="4" blurX.down="5" blurY.down="5" distance="2" quality="2" />
+		</s:filters>
+		<s:filters.disabled/>
+    </s:Ellipse>
+	
+	<s:Ellipse width="{width}" height="{height}" includeIn="over,down">
+		<s:fill>
+			<s:SolidColor alpha=".1"/>
+		</s:fill>
+	</s:Ellipse>
+	
+	<s:Ellipse  width="{width}" height="{height}">
+		<s:fill>
+			<s:SolidColor id="inkFill" alpha="0" alpha.down=".1"/>
+		</s:fill>
+	</s:Ellipse>
+	
+	<s:Label color="0xFFFFFF" fontFamily="FontAwesome" text="{hostComponent.iconFont}" fontSize="{width*0.45}" 
+			 color.disabled="#666666" maxDisplayedLines="1" horizontalCenter="0" verticalCenter="0" verticalAlign="middle" includeInLayout="{hostComponent.iconFont != null}"/>	
+   
+	<s:Group id="inkHolder" width="{width}" height="{height}" maskType="clip">
+		<s:mask>
+			<s:BorderContainer width="{width}" height="{height}" cornerRadius="{hostComponent.radius}" borderVisible="false"/>
+		</s:mask>
+	</s:Group>
+
+</s:Skin>
