@@ -67,6 +67,30 @@
 			inkColor: #f68f89;
 			color: #f44336;
 		}
+		
+		components|FloatingActionButton.lime
+		{
+			backgroundColor: #CDDC39;
+			inkColor: #c6e0fb;
+		}	
+		
+		components|FloatingActionButton.red
+		{
+			backgroundColor: #FF5252;
+			inkColor: #f68f89;
+		}			
+		
+		components|FloatingActionButton.amber
+		{
+			backgroundColor: #FFC107;
+			inkColor: #c6e0fb;
+		}
+		
+		components|FloatingActionButton.indigo
+		{
+			backgroundColor: #536DFE;
+			inkColor: #c6e0fb;
+		}		
 				
 		s|FormItem {
 			skinClass: ClassReference("spark.material.skins.FormItemSkin");
@@ -78,6 +102,7 @@
 			import flash.net.navigateToURL;
 			
 			import spark.material.skins.PanelSkin;
+			import flatspark.utils.AwesomeUtils;
 		]]>
 	</fx:Script>
 	
@@ -157,7 +182,16 @@
 							<components:Button label="primary" styleName="primary-flat"/>
 							<components:Button label="disabled" buttonStyle="flat" enabled="false"/>
 							<components:Button label="warning" styleName="warn-flat"/>
-						</s:FormItem>				
+						</s:FormItem>
+						<s:FormItem label="Floating Action Button">
+							<s:layout>
+								<s:HorizontalLayout gap="20"/>
+							</s:layout>
+							<components:FloatingActionButton radius="25" iconFont="{AwesomeUtils.fa_pencil}" styleName="lime" />
+							<components:FloatingActionButton radius="30" iconFont="{AwesomeUtils.fa_plus}" styleName="red" />
+							<components:FloatingActionButton radius="35" iconFont="{AwesomeUtils.fa_camera}" styleName="indigo" />
+							<components:FloatingActionButton radius="40" iconFont="{AwesomeUtils.fa_comment}" styleName="amber" />
+						</s:FormItem>							
 					</s:Form>
 				</s:Group>				
 				<components:Button label="Material Reference Guide" horizontalCenter="0" bottom="15" styleName="primary-flat" 
