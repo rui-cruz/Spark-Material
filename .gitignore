@@ -11,3 +11,6 @@ bin-debug/
 .flexProperties
 # should NOT be excluded as they contain compiler settings and other important
 # information for Eclipse / Flash Builder.
+FlexSparkMaterial/.flexProperties
+FlexSparkMaterial/.flexProperties
+FlexSparkMaterial/.actionScriptProperties
