@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:SparkSkin xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
+    xmlns:fb="http://ns.adobe.com/flashbuilder/2009" minWidth="5" minHeight="35" 
+    >
+
+    <fx:Metadata>
+	    <![CDATA[
+	        [HostComponent("spark.components.VScrollBar")]
+	    ]]>
+    </fx:Metadata> 
+    
+    <s:states>
+        <s:State name="normal" />
+		<s:State name="normalAndHovered" />
+        <s:State name="disabled" />
+        <s:State name="inactive" />
+    </s:states>
+	
+	<s:transitions>
+		<s:Transition fromState="*" toState="normalAndHovered" autoReverse="true">
+			<s:Parallel duration="200">
+				<s:Animate target="{track}">
+					<s:SimpleMotionPath property="alpha" valueTo="1"/>
+					<s:SimpleMotionPath property="width" valueTo="10"/>	
+				</s:Animate>
+				<s:Animate target="{thumb}">
+					<s:SimpleMotionPath property="width" valueTo="10"/>				
+				</s:Animate>
+				
+			</s:Parallel>
+		</s:Transition>
+	</s:transitions>
+   
+    <s:Button id="track" top="0" bottom="0" height="54" right="0" alpha="0" alpha.normalAndHovered="1"
+              focusEnabled="false" tabEnabled="false" width="5" width.normalAndHovered="10" 
+              skinClass="spark.material.skins.VScrollBarTrackSkin" />
+    
+    <s:Button id="thumb" height="54" right="0" width="5" width.normalAndHovered="10" 
+              focusEnabled="false" visible.inactive="false" tabEnabled="false"
+              skinClass="spark.material.skins.VScrollBarThumbSkin" />
+    
+</s:SparkSkin>

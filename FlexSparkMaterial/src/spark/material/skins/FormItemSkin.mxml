@@ -66,7 +66,7 @@
             </s:constraintColumns>         
             <s:constraintRows>
                 <!--- @private -->
-                <s:ConstraintRow id="row1" baseline="maxAscent:10" height="100%"/>
+                <s:ConstraintRow id="row1" baseline="maxAscent:5" height="100%"/>
 				<s:ConstraintRow id="row2" baseline="maxAscent:0" height="12"/>
             </s:constraintRows>  
         </s:FormItemLayout>
@@ -83,8 +83,8 @@
              bottom="row1:10" baseline="row1:0"/>  
     
     <s:Group id="contentGroup" showErrorTip="false" showErrorSkin="true"
-             left="contentCol:0" right="contentCol:1" 
-             baseline="row1:0" bottom="row1:10">
+             left="contentCol:10" right="contentCol:1" 
+             baseline="row1:0" bottom="row1:0">
         <s:layout>
             <s:VerticalLayout/>
         </s:layout>
@@ -92,15 +92,15 @@
     
     <s:Group id="helpContentGroup" excludeFrom="errorStates"
              fontStyle="italic" fontWeight="normal" color="0x666666"
-             left="contentCol:0" right="contentCol:1"
+             left="contentCol:10" right="contentCol:1"
              bottom="row2:0" baseline="row1:10"/>
 	
     <!--- @copy spark.components.FormItem#errorTextDisplay -->
 	<s:Group includeIn="errorStates" 
-			 left="contentCol:0" right="contentCol:1"
-			 bottom="row1:0" baseline="row2:-5" 
+			 left="contentCol:10" right="contentCol:1"
+			 bottom="row1:0" baseline="row2:0" 
 			 clipAndEnableScrolling="true" minHeight="12">
 		<s:RichText paddingTop="0" id="errorTextDisplay" fontWeight="normal" color="0xFE0000" maxDisplayedLines="1" fontSize="11"/>
 	</s:Group>
-        
+	
  </s:Skin>
