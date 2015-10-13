@@ -18,7 +18,7 @@
 	
 	<s:transitions>
 		<s:Transition fromState="*" toState="normalAndHovered" autoReverse="true">
-			<s:Parallel duration="200">
+			<s:Parallel duration="50">
 				<s:Animate target="{track}">
 					<s:SimpleMotionPath property="alpha" valueTo="1"/>
 					<s:SimpleMotionPath property="width" valueTo="10"/>	
