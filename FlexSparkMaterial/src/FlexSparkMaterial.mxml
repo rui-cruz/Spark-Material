@@ -67,35 +67,12 @@
 			inkColor: #f68f89;
 			color: #f44336;
 		}
-		
-		components|FloatingActionButton.lime
-		{
-			backgroundColor: #CDDC39;
-			inkColor: #c6e0fb;
-		}	
-		
-		components|FloatingActionButton.red
-		{
-			backgroundColor: #FF5252;
-			inkColor: #f68f89;
-		}			
-		
-		components|FloatingActionButton.amber
-		{
-			backgroundColor: #FFC107;
-			inkColor: #c6e0fb;
-		}
-		
-		components|FloatingActionButton.indigo
-		{
-			backgroundColor: #536DFE;
-			inkColor: #c6e0fb;
-		}
 			
 		components|DropDownList
 		{
 			selectionColor: #ffffff;
 			rollOverColor: #eeeeee;
+			downColor: #eeeeee;
 			selectedItemTextColor: #106cc8;
 			inkColor: #bababa;
 		}
@@ -109,15 +86,7 @@
 			skinClass: ClassReference("spark.material.skins.ScrollSkin");
 		}
 	</fx:Style>
-	
-	<fx:Script>
-		<![CDATA[
-			import flash.net.navigateToURL;
-			
-			import spark.material.skins.PanelSkin;
-			import flatspark.utils.AwesomeUtils;
-		]]>
-	</fx:Script>
+
 	
 	<fx:Declarations>
 		<mx:Validator id="textInputValidator" source="{firstName}" property="text"/>
@@ -172,6 +141,18 @@
 						<s:FormItem label="TextInput" required="true">						
 							<components:TextInput id="firstName" prompt="First Name" width="50%" change="textInputValidator.validate()" focusOut="textInputValidator.validate()"/>
 						</s:FormItem>
+						<s:FormItem label="TextArea with Scroller" required="false" >
+							<s:layout>
+								<s:HorizontalLayout verticalAlign="top" />
+							</s:layout>
+							<components:TextArea prompt="Some Text" height="110" enableScrolling="true" width="50%" />
+						</s:FormItem>
+						<s:FormItem label="TextArea without Scroller" required="false" >
+							<s:layout>
+								<s:HorizontalLayout verticalAlign="top" />
+							</s:layout>
+							<components:TextArea  prompt="Some Text" enableScrolling="false" width="50%" />
+						</s:FormItem>							
 						<s:FormItem label="DropdownList" required="true">
 							<s:layout>
 								<s:HorizontalLayout gap="10" verticalAlign="bottom"/>
@@ -229,20 +210,15 @@
 							<components:Button label="primary" styleName="primary-flat"/>
 							<components:Button label="disabled" buttonStyle="flat" enabled="false"/>
 							<components:Button label="warning" styleName="warn-flat"/>
+						</s:FormItem>	
+						<s:FormItem>
+							<s:RichEditableText id="textArea" text="some text" verticalAlign="middle" widthInChars="10" fontStyle="normal" color="#FF0000"
+												left="1" right="1" top="20" paddingBottom="3" bottom="2" multiline="true"/>	
 						</s:FormItem>
-						<s:FormItem label="Floating Action Button">
-							<s:layout>
-								<s:HorizontalLayout gap="20"/>
-							</s:layout>
-							<components:FloatingActionButton radius="25" iconFont="{AwesomeUtils.fa_pencil}" styleName="lime" />
-							<components:FloatingActionButton radius="30" iconFont="{AwesomeUtils.fa_plus}" styleName="red" />
-							<components:FloatingActionButton radius="35" iconFont="{AwesomeUtils.fa_camera}" styleName="indigo" />
-							<components:FloatingActionButton radius="40" iconFont="{AwesomeUtils.fa_comment}" styleName="amber" />
-						</s:FormItem>							
 					</s:Form>
 				</s:Group>				
 				<components:Button label="Material Reference Guide" horizontalCenter="0" bottom="15" styleName="primary-flat" 
-								   click="navigateToURL(new URLRequest('https://www.google.com/design/spec/material-design/introduction.html'),'_blank')"/>				
+								   click="navigateToURL(new URLRequest('https://www.google.com/design/spec/material-design/introduction.html'),'_blank')"/>
 			</s:Panel>
 		</s:VGroup>
 	</s:Scroller>	
