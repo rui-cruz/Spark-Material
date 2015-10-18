@@ -3,7 +3,6 @@
 			   xmlns:s="library://ns.adobe.com/flex/spark"
 			   xmlns:mx="library://ns.adobe.com/flex/mx"
 			   xmlns:components="spark.material.components.*"
-			   xmlns:skins="spark.material.skins.*"
 			   minWidth="955" minHeight="600" viewSourceURL="srcview/index.html">
 	
 		<fx:Style>
@@ -76,18 +75,17 @@
 			selectedItemTextColor: #106cc8;
 			inkColor: #bababa;
 		}
-				
+
+		s|Scroller {
+			skinClass: ClassReference("spark.material.skins.ScrollSkin");
+		}
+
 		s|FormItem {
 			skinClass: ClassReference("spark.material.skins.FormItemSkin");
 			showErrorTip: false;
 		}
-			
-		s|Scroller {
-			skinClass: ClassReference("spark.material.skins.ScrollSkin");
-		}
 	</fx:Style>
 
-	
 	<fx:Declarations>
 		<mx:Validator id="textInputValidator" source="{firstName}" property="text"/>
 		<mx:NumberValidator id="dropdownListValidator" source="{dropdownlist}" property="selectedIndex" minValue="0"
@@ -210,10 +208,6 @@
 							<components:Button label="primary" styleName="primary-flat"/>
 							<components:Button label="disabled" buttonStyle="flat" enabled="false"/>
 							<components:Button label="warning" styleName="warn-flat"/>
-						</s:FormItem>	
-						<s:FormItem>
-							<s:RichEditableText id="textArea" text="some text" verticalAlign="middle" widthInChars="10" fontStyle="normal" color="#FF0000"
-												left="1" right="1" top="20" paddingBottom="3" bottom="2" multiline="true"/>	
 						</s:FormItem>
 					</s:Form>
 				</s:Group>				
