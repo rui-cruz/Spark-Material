@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark">
+
+    <fx:Metadata>
+        [HostComponent("spark.components.ButtonBarButton")]
+    </fx:Metadata>
+
+    <s:states>
+        <s:State name="disabledAndSelected" stateGroups="selectedStates"/>
+        <s:State name="downAndSelected" stateGroups="selectedStates"/>
+        <s:State name="overAndSelected" stateGroups="selectedStates"/>
+        <s:State name="upAndSelected" stateGroups="selectedStates"/>
+        <s:State name="disabled"/>
+        <s:State name="down"/>
+        <s:State name="over"/>
+        <s:State name="up"/>
+    </s:states>
+
+    <s:Rect left="0" right="0" top="0" bottom="0">
+        <s:fill>
+            <s:SolidColor color="{getStyle('backgroundColor')}"/>
+        </s:fill>
+    </s:Rect>
+
+    <s:Label id="labelDisplay"
+             textAlign="center"
+             verticalAlign="middle"
+             maxDisplayedLines="1"
+             horizontalCenter="0" verticalCenter="1"
+             left="30" right="30" top="13" bottom="15"
+             fontWeight.selectedStates="bold" color.selectedStates="{getStyle('selectedTabColor')}">
+    </s:Label>
+
+    <s:Group id="inkHolder" clipAndEnableScrolling="true" width="{width}" height="{height}"/>
+</s:Skin>

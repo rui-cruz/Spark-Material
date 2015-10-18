@@ -77,7 +77,7 @@
             </s:Rect>
             
             <s:Scroller id="scroller" left="0" top="0" right="0" bottom="0" hasFocusableChildren="false" minViewportInset="0" horizontalScrollPolicy="off"
-						measuredSizeIncludesScrollBars="false">
+						measuredSizeIncludesScrollBars="false" skinClass="spark.material.skins.ScrollSkin">
                 <s:DataGroup id="dataGroup" itemRenderer="spark.material.skins.DefaultItemRenderer">
                     <s:layout>
                         <s:VerticalLayout gap="0" horizontalAlign="contentJustify" requestedMinRowCount="1" requestedMaxRowCount="5"/>
