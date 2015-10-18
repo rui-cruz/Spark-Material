@@ -13,8 +13,6 @@ bin-release/
 .flexProperties
 # should NOT be excluded as they contain compiler settings and other important
 # information for Eclipse / Flash Builder.
-FlexSparkMaterial/.flexProperties
-FlexSparkMaterial/.actionScriptProperties
 
 *.swf
 *.js
