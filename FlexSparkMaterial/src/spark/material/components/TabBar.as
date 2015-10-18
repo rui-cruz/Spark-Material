@@ -1,17 +1,13 @@
 package spark.material.components
 {
-import flash.geom.Rectangle;
-import flash.geom.Rectangle;
+    import flash.geom.Rectangle;
 
-import mx.core.IVisualElement;
-import mx.events.FlexEvent;
-
-import spark.components.TabBar;
-import spark.effects.Animate;
-import spark.effects.animation.MotionPath;
-import spark.effects.animation.SimpleMotionPath;
-import spark.effects.easing.Sine;
-import spark.primitives.Line;
+    import spark.components.TabBar;
+    import spark.effects.Animate;
+    import spark.effects.animation.MotionPath;
+    import spark.effects.animation.SimpleMotionPath;
+    import spark.effects.easing.Sine;
+    import spark.primitives.Line;
 
     public class TabBar extends spark.components.TabBar
     {
@@ -20,18 +16,7 @@ import spark.primitives.Line;
 
         public function TabBar()
         {
-            //TO-DO: Find the method that validates the selected tab or invalidate on itemSelected to get bounds
-            addEventListener(FlexEvent.CREATION_COMPLETE, onCreationComplete)
-        }
-
-        private function onCreationComplete(event:FlexEvent):void
-        {
-            moveSelectionStroke();
-        }
-
-        override protected function partAdded(partName:String, instance:Object):void
-        {
-            super.partAdded(partName, instance);
+            super();
         }
 
         override public function drawFocus(isFocused:Boolean):void
@@ -45,6 +30,18 @@ import spark.primitives.Line;
 
             if(selected)
                 moveSelectionStroke();
+        }
+
+        private var lastUnscaledWidth:Number = 0;
+        override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void
+        {
+            if(unscaledWidth > 0 && dataGroup && unscaledWidth > lastUnscaledWidth)
+            {
+                lastUnscaledWidth = unscaledWidth;
+                moveSelectionStroke();
+            }
+
+            super.updateDisplayList(unscaledWidth, unscaledHeight);
         }
 
         private var lineLeftAnimation:Animate;
