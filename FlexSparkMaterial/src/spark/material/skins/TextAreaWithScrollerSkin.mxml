@@ -59,7 +59,8 @@
 		</s:Transition>
 	</s:transitions>
 
-	<s:Scroller id="textDisplayContainer" height="{hostComponent.height}" minHeight="35" left="1" right="1" bottom="10" top="20">
+	<s:Scroller id="textDisplayContainer" height="{hostComponent.height}" minHeight="35" left="1" right="1" bottom="10" top="20"
+				skinClass="spark.material.skins.ScrollSkin">
 		<s:RichEditableText id="textDisplay" verticalAlign="top" fontStyle="normal" color="#000000"
 							left="0" right="0" top="0" bottom="0" lineThrough.disabledWithFloatPrompt="true" multiline="true"/>		
 	</s:Scroller>
