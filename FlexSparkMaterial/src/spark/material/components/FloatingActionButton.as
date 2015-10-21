@@ -7,7 +7,7 @@ package spark.material.components
 	import spark.components.Group;
 	import spark.material.skins.FloatingActionButtonSkin;
 
-	[Style(name="inkColor", type="uint", format="Color", inherit="yes", defaultValue="#666666")]
+	[Style(name="inkColor", type="uint", format="Color", inherit="yes")]
 
 	public class FloatingActionButton extends spark.components.Button
 	{
@@ -17,7 +17,7 @@ package spark.material.components
 		[SkinPart(required="true")]
 		public var inkHolder:Group;
 		
-		public var inkColor:uint = 0x999999;
+		public var inkColor:uint = 0x666666;
 
 		
 		public function FloatingActionButton()

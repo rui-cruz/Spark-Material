@@ -30,7 +30,7 @@
 
     <s:Line id="selectedTabLine" bottom="0">
         <s:stroke>
-            <s:SolidColorStroke weight="2" color="{getStyle('selectedTabColor')}" caps="square"/>
+            <s:SolidColorStroke weight="2" color="{getStyle('selectionColor')}" caps="square"/>
         </s:stroke>
     </s:Line>
 

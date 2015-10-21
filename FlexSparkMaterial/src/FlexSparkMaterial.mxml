@@ -11,14 +11,14 @@
 
 		@font-face {
 			src: url("spark/material/assets/fonts/Roboto.swf");
-			cff:false;
+			cff:true;
 			fontFamily: "Roboto";
 			fontStyle: normal;
 		}
 		
 		@font-face {
 			src: url("spark/material/assets/fonts/Roboto.swf");
-			cff:false;
+			cff:true;
 			fontFamily: "Roboto";
 			fontStyle: italic;
 		}
@@ -27,7 +27,7 @@
 			src: url("spark/material/assets/fonts/Roboto.swf");
 			fontFamily: "Roboto";
 			fontWeight: bold;
-			fontSharpness: 400;
+            fontSharpness: 400;
 			cff:true;
 		}
 		
@@ -37,9 +37,17 @@
 			fontStyle:normal;
 			color: #000000;
 			fontSize: 14;
-			modal-transparency-duration: 0;
+			modal-transparency-duration: 200;
+            modal-transparency-blur: 0;
+            modal-transparency: 0.6;
+            modal-transparency-color: #000000;
 		}
-		
+
+        s|FormItem {
+            skinClass: ClassReference("spark.material.skins.FormItemSkin");
+            showErrorTip: false;
+        }
+
 		components|Button.primary
 		{
 			backgroundColor: #106cc8;
@@ -101,15 +109,9 @@
 			inkColor: #bababa;
 		}
 
-		s|FormItem {
-			skinClass: ClassReference("spark.material.skins.FormItemSkin");
-			showErrorTip: false;
-		}
-
 		components|TabBar {
-			skinClass: ClassReference("spark.material.skins.TabBarSkin");
+			selectionColor: #ffff8d;
 			backgroundColor: #00BCD4;
-			selectedTabColor: #ffff8d;
 			typographicCase: uppercase;
 			color: #ffffff;
 		}
@@ -117,18 +119,30 @@
 		components|ButtonBarButton {
 			inkColor: #ffff8d;
 			backgroundColor: #00BCD4;
-			selectedTabColor: #ffff8d;
+			selectionColor: #ffff8d;
 		}
 	</fx:Style>
 
 	<fx:Script>
 		<![CDATA[
 			import flatspark.utils.AwesomeUtils;
+
+			import spark.material.components.Alert;
+
+			private function validateAlert():void
+            {
+                var errors:Array = Validator.validateAll([alertMessageValidator, alertTitleValidator]);
+
+                if(errors.length == 0)
+				    Alert.show(alertMessage.text, alertTitle.text);
+			}
 		]]>
 	</fx:Script>
 
 	<fx:Declarations>
 		<mx:Validator id="textInputValidator" source="{firstName}" property="text"/>
+        <mx:Validator id="alertMessageValidator" source="{alertMessage}" property="text" requiredFieldError="Message is required."/>
+        <mx:Validator id="alertTitleValidator" source="{alertTitle}" property="text" requiredFieldError="Title is required."/>
 		<mx:NumberValidator id="dropdownListValidator" source="{dropdownlist}" property="selectedIndex" minValue="0" lowerThanMinError="This field is required"/>
 		<s:ArrayList id="cities">
 			<s:source>
@@ -290,6 +304,14 @@
 							<components:FloatingActionButton radius="35" iconFont="{AwesomeUtils.fa_camera}" styleName="indigo" />
 							<components:FloatingActionButton radius="40" iconFont="{AwesomeUtils.fa_comment}" styleName="amber" />
 						</s:FormItem>
+                        <s:FormItem label="Alert">
+                            <s:layout>
+                                <s:HorizontalLayout gap="20" verticalAlign="middle"/>
+                            </s:layout>
+                            <components:TextInput id="alertMessage" prompt="Message" text="You can specify some text in here." width="100%"/>
+                            <components:TextInput id="alertTitle" prompt="Title" text="This is an alert title"/>
+                            <components:Button label="Open" click="validateAlert()" styleName="primary"/>
+                        </s:FormItem>
 					</s:Form>
 				</s:Group>				
 				<components:Button label="Material Reference Guide" horizontalCenter="0" bottom="15" styleName="primary-flat" 

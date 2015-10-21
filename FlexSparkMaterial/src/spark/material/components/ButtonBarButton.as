@@ -6,20 +6,27 @@ package spark.material.components
 
     import spark.components.ButtonBarButton;
     import spark.components.Group;
+    import spark.material.skins.TabBarButtonSkin;
 
-    [Style(name="inkColor", type="uint", format="Color", inherit="yes", defaultValue="#666666")]
-    [Style(name="selectedItemTextColor", type="uint", format="Color", inherit="yes", defaultValue="#106cc8")]
+    [Style(name="inkColor", type="uint", format="Color", inherit="yes")]
+    [Style(name="selectedItemTextColor", type="uint", format="Color", inherit="yes")]
 
     public class ButtonBarButton extends spark.components.ButtonBarButton
     {
         [SkinPart(required="true")]
         public var inkHolder:Group;
 
-        public var inkColor:uint = 0x999999;
+        public var inkColor:uint = 0x666666;
 
         public function ButtonBarButton()
         {
             super();
+
+            useHandCursor = true;
+            buttonMode = true;
+
+            if(!getStyle("skinClass"))
+                setStyle("skinClass", TabBarButtonSkin);
         }
 
         override protected function attachSkin():void

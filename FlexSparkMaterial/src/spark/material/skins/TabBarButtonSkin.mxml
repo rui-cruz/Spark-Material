@@ -28,7 +28,7 @@
              maxDisplayedLines="1"
              horizontalCenter="0" verticalCenter="1"
              left="30" right="30" top="13" bottom="15"
-             fontWeight.selectedStates="bold" color.selectedStates="{getStyle('selectedTabColor')}">
+             fontWeight.selectedStates="bold" color.selectedStates="{getStyle('selectionColor')}">
     </s:Label>
 
     <s:Group id="inkHolder" clipAndEnableScrolling="true" width="{width}" height="{height}"/>
