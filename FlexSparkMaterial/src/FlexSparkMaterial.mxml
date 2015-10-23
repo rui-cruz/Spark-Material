@@ -3,7 +3,8 @@
 			   xmlns:s="library://ns.adobe.com/flex/spark"
 			   xmlns:mx="library://ns.adobe.com/flex/mx"
 			   xmlns:components="spark.material.components.*"
-			   minWidth="955" minHeight="600" viewSourceURL="srcview/index.html">
+			   minWidth="955" minHeight="600" viewSourceURL="srcview/index.html"
+			   addedToStage="initMouseWheel()">
 	
 	<fx:Style>
 		@namespace components "spark.material.components.*";
@@ -124,6 +125,13 @@
 	<fx:Script>
 		<![CDATA[
 			import flatspark.utils.AwesomeUtils;
+
+			import utils.MouseWheelEnabler;
+
+			private function initMouseWheel() : void
+			{
+				MouseWheelEnabler.init( stage );
+			}
 		]]>
 	</fx:Script>
 
