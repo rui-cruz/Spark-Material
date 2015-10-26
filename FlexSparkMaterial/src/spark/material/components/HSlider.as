@@ -11,7 +11,7 @@ package spark.material.components
 	[SkinState("normalAndZero")]
 	[SkinState("disabledAndZero")]
 	
-	[Style(name="inkColor", type="uint", format="Color", inherit="yes", defaultValue="#ff6868")]
+	[Style(name="inkColor", type="uint", format="Color", inherit="yes")]
 	
 	public class HSlider extends spark.components.HSlider
 	{

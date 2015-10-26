@@ -128,7 +128,8 @@
 							<components:RadioButton label="Disabled and Selected" enabled="false" selected="true"/>
 						</s:FormItem>
 						<s:FormItem label="Slider">
-							<components:HSlider enabled="{switcher.selected}" minimum="0" maximum="10" width="200" stepSize="0"/>
+							<components:HSlider id="hSlider" enabled="{switcher.selected}" value="{vSlider.value}" minimum="0" maximum="10" width="200" stepSize="0"/>
+                            <components:VSlider id="vSlider" enabled="{switcher.selected}" value="{hSlider.value}" minimum="0" maximum="10" stepSize="0"/>
 						</s:FormItem>
 						<s:FormItem label="Button">
 							<s:layout>
