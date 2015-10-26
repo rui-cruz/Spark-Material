@@ -58,7 +58,7 @@ package spark.material.components
 			
 			if(value < maximum)
 			{
-				skin.graphics.lineStyle(2, 0xb2b2b2);
+				skin.graphics.lineStyle(2, 0xb2b2b2, 1, false, "normal", "square");
 				skin.graphics.moveTo(thumb.x + thumb.width + (enabled ? 0 : 2), height*.5);
 				skin.graphics.lineTo(width, height*.5);
 			}

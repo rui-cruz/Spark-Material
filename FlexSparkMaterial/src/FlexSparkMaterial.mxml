@@ -268,13 +268,13 @@
                             <s:layout>
                                 <s:HorizontalLayout gap="20"/>
                             </s:layout>
-                            <s:VGroup>
-                                <components:HSlider id="hSlider" value="{vSlider.value}" minimum="0" maximum="10" width="200" stepSize="0"/>
+                            <s:VGroup width="50%" horizontalAlign="center">
+                                <components:HSlider id="hSlider" value="{vSlider.value}" minimum="0" maximum="10" width="100%" stepSize="0"/>
                                 <components:VSlider id="vSlider" value="{hSlider.value}" minimum="0" maximum="10" stepSize="0"/>
                             </s:VGroup>
-                            <s:VGroup>
-                                <components:HSlider enabled="false" value="{vSlider.value}" minimum="0" maximum="10" width="200" stepSize="0"/>
-                                <components:VSlider enabled="false" value="{hSlider.value}" minimum="0" maximum="10" stepSize="0"/>
+                            <s:VGroup width="50%" horizontalAlign="center">
+                                <components:HSlider value="{vSlider.value}" enabled="false" minimum="0" maximum="10" width="100%" stepSize="0"/>
+                                <components:VSlider value="{hSlider.value}" enabled="false" minimum="0" maximum="10" stepSize="0"/>
                             </s:VGroup>
                         </s:FormItem>
 						<s:FormItem label="Button">
