@@ -9,7 +9,7 @@ package spark.material.components
 	import spark.material.skins.ButtonSkin;
 	import spark.material.skins.FlatButtonSkin;
 	
-	[Style(name="inkColor", type="uint", format="Color", inherit="yes", defaultValue="#666666")]
+	[Style(name="inkColor", type="uint", format="Color", inherit="yes", defaultValue="#999999")]
 	[Style(name="buttonStyle", type="String", enumeration="flat,raised", inherit="yes")]
 	
 	public class Button extends spark.components.Button

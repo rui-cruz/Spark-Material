@@ -14,7 +14,7 @@
 		<s:State name="disabled"/>
 	</s:states>
 	
-	<s:Ellipse width="14" height="14" width.down="18" height.down="18">
+	<s:Ellipse width="14" height="14">
 		<s:stroke>
 			<s:SolidColorStroke color="#4557b7" color.disabled="#b2b2b2"/>
 		</s:stroke>

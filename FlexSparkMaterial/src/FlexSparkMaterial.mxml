@@ -3,11 +3,13 @@
 			   xmlns:s="library://ns.adobe.com/flex/spark"
 			   xmlns:mx="library://ns.adobe.com/flex/mx"
 			   xmlns:components="spark.material.components.*"
-			   xmlns:skins="spark.material.skins.*"
-			   minWidth="955" minHeight="600" viewSourceURL="srcview/index.html">
+			   minWidth="955" minHeight="600" viewSourceURL="srcview/index.html"
+			   addedToStage="initMouseWheel()">
 	
-		<fx:Style>
+	<fx:Style>
 		@namespace components "spark.material.components.*";
+		@namespace s "library://ns.adobe.com/flex/spark";
+
 		@font-face {
 			src: url("spark/material/assets/fonts/Roboto.swf");
 			cff:false;
@@ -66,25 +68,143 @@
 			inkColor: #f68f89;
 			color: #f44336;
 		}
+
+		components|FloatingActionButton.lime
+		{
+			backgroundColor: #CDDC39;
+			inkColor: #c6e0fb;
+		}
+
+		components|FloatingActionButton.red
+		{
+			backgroundColor: #FF5252;
+			inkColor: #f68f89;
+		}
+
+		components|FloatingActionButton.amber
+		{
+			backgroundColor: #FFC107;
+			inkColor: #c6e0fb;
+		}
+
+		components|FloatingActionButton.indigo
+		{
+			backgroundColor: #536DFE;
+			inkColor: #c6e0fb;
+		}
+
+		components|DropDownList
+		{
+			selectionColor: #ffffff;
+			rollOverColor: #eeeeee;
+			downColor: #eeeeee;
+			selectedItemTextColor: #106cc8;
+			inkColor: #bababa;
+		}
+
+		s|FormItem {
+			skinClass: ClassReference("spark.material.skins.FormItemSkin");
+			showErrorTip: false;
+		}
+
+		components|TabBar {
+			skinClass: ClassReference("spark.material.skins.TabBarSkin");
+			backgroundColor: #00BCD4;
+			selectedTabColor: #ffff8d;
+			typographicCase: uppercase;
+			color: #ffffff;
+		}
+
+		components|ButtonBarButton {
+			inkColor: #ffff8d;
+			backgroundColor: #00BCD4;
+			selectedTabColor: #ffff8d;
+		}
 	</fx:Style>
+
 	<fx:Script>
 		<![CDATA[
-			import flash.net.navigateToURL;
-			
-			import spark.material.skins.PanelSkin;
+			import flatspark.utils.AwesomeUtils;
+
+			import utils.MouseWheelEnabler;
+
+			private function initMouseWheel() : void
+			{
+				MouseWheelEnabler.init( stage );
+			}
 		]]>
 	</fx:Script>
+
+	<fx:Declarations>
+		<mx:Validator id="textInputValidator" source="{firstName}" property="text"/>
+		<mx:NumberValidator id="dropdownListValidator" source="{dropdownlist}" property="selectedIndex" minValue="0" lowerThanMinError="This field is required"/>
+		<s:ArrayList id="cities">
+			<s:source>
+				<fx:Array>
+					<fx:Object label="Aveiro"/>
+					<fx:Object label="Beja"/>
+					<fx:Object label="Braga"/>
+					<fx:Object label="Bragança"/>
+					<fx:Object label="Castelo Branco"/>
+					<fx:Object label="Coimbra"/>
+					<fx:Object label="Évora"/>
+					<fx:Object label="Faro"/>
+					<fx:Object label="Guarda"/>
+					<fx:Object label="Leiria"/>
+					<fx:Object label="Lisboa"/>
+					<fx:Object label="Portalegre"/>
+					<fx:Object label="Porto"/>
+					<fx:Object label="Santarém"/>
+					<fx:Object label="Setubal"/>
+					<fx:Object label="Viana do Castelo"/>
+					<fx:Object label="Vila Real"/>
+					<fx:Object label="Viseu"/>
+				</fx:Array>
+			</s:source>
+		</s:ArrayList>
+		<s:ArrayList id="tabs">
+			<s:source>
+				<fx:Array>
+					<fx:Object label="One"/>
+					<fx:Object label="Two"/>
+					<fx:Object label="Three"/>
+					<fx:Object label="Four"/>
+				</fx:Array>
+			</s:source>
+		</s:ArrayList>
+	</fx:Declarations>
 	
 	<s:Scroller left="0" top="0" bottom="0" right="0">
-		<s:VGroup horizontalAlign="center" verticalAlign="middle" paddingTop="20" paddingBottom="20">			
-			<s:Panel skinClass="spark.material.skins.PanelSkin" title="Spark Material" width="800">				
+		<s:VGroup horizontalAlign="center" verticalAlign="middle" paddingTop="20" paddingBottom="20">
+
+			<s:Panel skinClass="spark.material.skins.PanelSkin" title="Spark Material" width="800">
 				<s:RichText left="25" top="25" right="25" color="0x666666" lineHeight="120%" fontSize="16" fontStyle="italic">
 					<s:textFlow>
 						<s:TextFlow>
-							<s:p><s:span>"A material metaphor is the unifying theory of a rationalized space and a system of motion. The material is grounded in tactile reality, inspired by the study of paper and ink, yet technologically advanced and open to imagination and magic.</s:span></s:p><s:p/><s:p><s:span>Surfaces and edges of the material provide visual cues that are grounded in reality. The use of familiar tactile attributes helps users quickly understand affordances. Yet the flexibility of the material creates new affordances that supercede those in the physical world, without breaking the rules of physics. </s:span></s:p><s:p/><s:p><s:span>The fundamentals of light, surface, and movement are key to conveying how objects move, interact, and exist in space and in relation to each other. Realistic lighting shows seams, divides space, and indicates moving parts."</s:span></s:p>
+							<s:p>
+								<s:span>
+									"A material metaphor is the unifying theory of a rationalized space and a system of motion. The material is grounded in tactile reality,
+									inspired by the study of paper and ink, yet technologically advanced and open to imagination and magic.
+								</s:span>
+							</s:p>
+							<s:p/>
+							<s:p>
+								<s:span>
+									Surfaces and edges of the material provide visual cues that are grounded in reality. The use of familiar tactile attributes helps
+									users quickly understand affordances. Yet the flexibility of the material creates new affordances that supercede those in the physical
+									world, without breaking the rules of physics.
+								</s:span>
+							</s:p>
+							<s:p/>
+							<s:p>
+								<s:span>
+									The fundamentals of light, surface, and movement are key to conveying how objects move, interact, and exist in space and in relation to each other.
+									Realistic lighting shows seams, divides space, and indicates moving parts."
+								</s:span>
+							</s:p>
 						</s:TextFlow>
 					</s:textFlow>
-				</s:RichText>				
+				</s:RichText>
 				<s:Group left="20" right="20" bottom="65" top="260">
 					<s:Rect left="0" right="0" bottom="0" top="0">
 						<s:fill>
@@ -93,14 +213,31 @@
 						<s:filters>
 							<s:DropShadowFilter alpha="0.3" angle="90" blurX="4" blurY="4" distance="1" quality="2" strength="1"/>
 						</s:filters>
-					</s:Rect>					
-					<s:Form top="0" left="0" bottom="0" right="0">
-						<s:FormItem label="TextInput">
-							<s:HGroup gap="20" width="100%">
-								<components:TextInput prompt="First Name" width="50%"/>
-								<components:TextInput prompt="Last Name" width="50%"/>
-							</s:HGroup>
-							<components:TextInput prompt="Complete Name" width="100%"/>
+					</s:Rect>
+					<components:TabBar left="0" right="0" dataProvider="{tabs}"/>
+					<s:Form top="40" left="0" bottom="0" right="0">
+						<s:FormItem label="TextInput" required="true">						
+							<components:TextInput id="firstName" prompt="First Name" width="50%" change="textInputValidator.validate()" focusOut="textInputValidator.validate()"/>
+						</s:FormItem>
+						<s:FormItem label="TextArea with Scroller" required="false" >
+							<s:layout>
+								<s:HorizontalLayout verticalAlign="top" />
+							</s:layout>
+							<components:TextArea prompt="Some Text" height="110" enableScrolling="true" width="50%" />
+						</s:FormItem>
+						<s:FormItem label="TextArea without Scroller" required="false" >
+							<s:layout>
+								<s:HorizontalLayout verticalAlign="top" />
+							</s:layout>
+							<components:TextArea  prompt="Some Text" enableScrolling="false" width="50%" />
+						</s:FormItem>							
+						<s:FormItem label="DropdownList" required="true">
+							<s:layout>
+								<s:HorizontalLayout gap="10" verticalAlign="bottom"/>
+							</s:layout>
+							<components:DropDownList id="dropdownlist" dataProvider="{cities}" prompt="State" change="dropdownListValidator.validate()" focusOut="dropdownListValidator.validate()"/>
+							<s:Label text="clear" color="#f44336" fontSize="13" buttonMode="true" useHandCursor="true" click="dropdownlist.selectedIndex=-1;dropdownListValidator.validate()"
+									 visible="{dropdownlist.selectedIndex!=-1}"/>
 						</s:FormItem>
 						<s:FormItem label="CheckBox">
 							<s:layout>
@@ -128,9 +265,18 @@
 							<components:RadioButton label="Disabled and Selected" enabled="false" selected="true"/>
 						</s:FormItem>
 						<s:FormItem label="Slider">
-							<components:HSlider id="hSlider" enabled="{switcher.selected}" value="{vSlider.value}" minimum="0" maximum="10" width="200" stepSize="0"/>
-                            <components:VSlider id="vSlider" enabled="{switcher.selected}" value="{hSlider.value}" minimum="0" maximum="10" stepSize="0"/>
-						</s:FormItem>
+                            <s:layout>
+                                <s:HorizontalLayout gap="20"/>
+                            </s:layout>
+                            <s:VGroup>
+                                <components:HSlider id="hSlider" value="{vSlider.value}" minimum="0" maximum="10" width="200" stepSize="0"/>
+                                <components:VSlider id="vSlider" value="{hSlider.value}" minimum="0" maximum="10" stepSize="0"/>
+                            </s:VGroup>
+                            <s:VGroup>
+                                <components:HSlider enabled="false" value="{vSlider.value}" minimum="0" maximum="10" width="200" stepSize="0"/>
+                                <components:VSlider enabled="false" value="{hSlider.value}" minimum="0" maximum="10" stepSize="0"/>
+                            </s:VGroup>
+                        </s:FormItem>
 						<s:FormItem label="Button">
 							<s:layout>
 								<s:HorizontalLayout gap="20"/>
@@ -148,11 +294,20 @@
 							<components:Button label="primary" styleName="primary-flat"/>
 							<components:Button label="disabled" buttonStyle="flat" enabled="false"/>
 							<components:Button label="warning" styleName="warn-flat"/>
-						</s:FormItem>				
+						</s:FormItem>
+						<s:FormItem label="Floating Action Button">
+							<s:layout>
+								<s:HorizontalLayout gap="20"/>
+							</s:layout>
+							<components:FloatingActionButton radius="25" iconFont="{AwesomeUtils.fa_pencil}" styleName="lime" />
+							<components:FloatingActionButton radius="30" iconFont="{AwesomeUtils.fa_plus}" styleName="red" />
+							<components:FloatingActionButton radius="35" iconFont="{AwesomeUtils.fa_camera}" styleName="indigo" />
+							<components:FloatingActionButton radius="40" iconFont="{AwesomeUtils.fa_comment}" styleName="amber" />
+						</s:FormItem>
 					</s:Form>
 				</s:Group>				
 				<components:Button label="Material Reference Guide" horizontalCenter="0" bottom="15" styleName="primary-flat" 
-								   click="navigateToURL(new URLRequest('https://www.google.com/design/spec/material-design/introduction.html'),'_blank')"/>				
+								   click="navigateToURL(new URLRequest('https://www.google.com/design/spec/material-design/introduction.html'),'_blank')"/>
 			</s:Panel>
 		</s:VGroup>
 	</s:Scroller>	

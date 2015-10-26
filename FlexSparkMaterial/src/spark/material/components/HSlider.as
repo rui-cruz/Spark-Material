@@ -36,9 +36,8 @@ package spark.material.components
 			
 			if(_value == 0 || oldValue == 0)
 			{
-				enabled = !enabled;
-				commitProperties();
-				enabled = !enabled;
+				styleChanged(null);
+				invalidateSkinState();
 			}
 		}
 		
@@ -57,9 +56,13 @@ package spark.material.components
 				skin.graphics.lineTo(thumb.x - (enabled ? 0 : 3), height*.5);
 			}
 			
-			skin.graphics.lineStyle(2, 0xb2b2b2);
-			skin.graphics.moveTo(thumb.x + thumb.width + (enabled ? 0 : 2), height*.5);
-			skin.graphics.lineTo(width, height*.5);
+			if(value < maximum)
+			{
+				skin.graphics.lineStyle(2, 0xb2b2b2);
+				skin.graphics.moveTo(thumb.x + thumb.width + (enabled ? 0 : 2), height*.5);
+				skin.graphics.lineTo(width, height*.5);
+			}
+			
 			skin.graphics.endFill();
 		}
 		

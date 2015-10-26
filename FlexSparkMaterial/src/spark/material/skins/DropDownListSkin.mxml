@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:SparkSkin xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark" 
+    xmlns:fb="http://ns.adobe.com/flashbuilder/2009" alpha.disabled=".5" minWidth="100" fontSize="16"
+	xmlns:components="spark.material.components.*"> 
+
+    <fx:Metadata>
+	    <![CDATA[
+	        [HostComponent("spark.components.DropDownList")]
+	    ]]>
+    </fx:Metadata>
+	
+	<fx:Script>
+		<![CDATA[
+			import spark.effects.easing.Sine;
+			
+			private static const SINE:Sine = new Sine(.3);
+		]]>
+	</fx:Script>
+
+    <s:states>
+        <s:State name="normal" />
+		<s:State name="normalError" stateGroups="errorStates"/>
+		<s:State name="normalFocused" stateGroups="focusedStates"/>
+		<s:State name="normalFocusedError" stateGroups="focusedStates,errorStates"/>
+        <s:State name="open" stateGroups="openStates"/>
+        <s:State name="disabled" />
+		<s:State name="normalWithFloatPrompt" stateGroups="floatPromptStates"/>
+		<s:State name="normalWithFloatPromptError" stateGroups="floatPromptStates,errorStates"/>
+		<s:State name="normalFocusedWithFloatPrompt" stateGroups="floatPromptStates,focusedStates"/>
+		<s:State name="normalFocusedWithFloatPromptError" stateGroups="floatPromptStates,focusedStates,errorStates"/>
+		<s:State name="openError" stateGroups="openStates,errorStates"/>
+		<s:State name="openFocused" stateGroups="openStates,focusedStates"/>
+		<s:State name="openFocusedError" stateGroups="openStates,focusedStates,errorStates"/>
+		<s:State name="openWithFloatPrompt" stateGroups="openStates,floatPromptStates"/>
+		<s:State name="openFocusedWithFloatPrompt" stateGroups="openStates,floatPromptStates,focusedStates"/>
+		<s:State name="disabledWithFloatPrompt" stateGroups="disabledStates,floatPromptStates"/>
+		<s:State name="disabledWithFloatPromptError" stateGroups="disabledStates,floatPromptStates,errorStates"/>
+    </s:states>
+    
+	<s:transitions>
+		<s:Transition fromState="*" toState="normalFocusedWithFloatPrompt" autoReverse="true">
+			<s:Parallel duration="100">
+				<s:Animate target="{promptDisplay}" easer="{SINE}">
+					<s:SimpleMotionPath property="top"/>
+					<s:SimpleMotionPath property="fontSize"/>					
+				</s:Animate>
+				<s:Animate target="{focusedBorder}" easer="{SINE}">
+					<s:SimpleMotionPath property="right"/>
+				</s:Animate>
+			</s:Parallel>
+		</s:Transition>
+		<s:Transition fromState="*" toState="normalFocusedWithFloatPromptError" autoReverse="true">
+			<s:Parallel duration="100">
+				<s:Animate target="{promptDisplay}" easer="{SINE}">
+					<s:SimpleMotionPath property="top"/>
+					<s:SimpleMotionPath property="fontSize"/>					
+				</s:Animate>
+				<s:Animate target="{focusedBorder}" easer="{SINE}">
+					<s:SimpleMotionPath property="right"/>
+				</s:Animate>
+			</s:Parallel>
+		</s:Transition>
+	</s:transitions>
+	
+    <components:PopUpAnchor id="popUp" displayPopUp.normal="false" displayPopUp.openStates="true" includeIn="openStates"
+        itemDestructionPolicy="auto" popUpPosition="below" popUpWidthMatchesAnchorWidth="false" includeInLayout="false">
+        
+        <s:Group id="dropDown" visible="false" showEffect="Fade" hideEffect="Fade">
+        
+            <s:RectangularDropShadow id="dropShadow" blurX="5" blurY="6" alpha="0.3" distance="1"
+                 angle="90" color="#000000" left="0" top="0" right="0" bottom="0"/>
+        				
+            <s:Rect id="background" left="0" right="0" top="0" bottom="0" >
+                <s:fill>
+                    <s:SolidColor id="bgFill" color="0xFFFFFF" />
+                </s:fill>
+            </s:Rect>
+            
+            <s:Scroller id="scroller" left="0" top="0" right="0" bottom="0" hasFocusableChildren="false" minViewportInset="0" horizontalScrollPolicy="off"
+						measuredSizeIncludesScrollBars="false" skinClass="spark.material.skins.ScrollSkin">
+                <s:DataGroup id="dataGroup" itemRenderer="spark.material.skins.DefaultItemRenderer">
+                    <s:layout>
+                        <s:VerticalLayout gap="0" horizontalAlign="contentJustify" requestedMinRowCount="1" requestedMaxRowCount="5"/>
+                    </s:layout>
+                </s:DataGroup> 
+            </s:Scroller>
+        </s:Group>
+    </components:PopUpAnchor>
+    
+    <s:Button id="openButton" left="0" right="0" height="25" bottom="0" focusEnabled="false" tabEnabled="false"
+			  skinClass="spark.material.skins.DropDownListButtonSkin" skinClass.floatPromptStates="spark.material.skins.DropDownListSelectedButtonSkin"/>  
+    	
+	<s:Label id="promptDisplay" maxDisplayedLines="1" left="1" cacheAsBitmap="true" right="30"
+			 verticalAlign="middle" top="20" top.floatPromptStates="1" fontStyle="normal" focusEnabled="false" tabEnabled="false"
+			 mouseEnabled="false" mouseChildren="false" fontSize.floatPromptStates="12" lineThrough.disabled="true"
+			 color="#999999" color.focusedStates="#5380D0" color.errorStates="#ff0000"/>
+	
+    <s:Label id="labelDisplay" verticalAlign="middle" fontStyle="normal" color="#CCCCCC" color.floatPromptStates="#000000" color.focusedStates="#000000" maxDisplayedLines="1" mouseEnabled="false"
+			 left="1" right="30" top="20" paddingBottom="3" bottom="2" lineThrough.disabledWithFloatPrompt="true" visible="false" mouseChildren="false"
+			 focusEnabled="false" tabEnabled="false"/>
+	
+	<s:Line left="0" right="0" bottom="0">
+		<s:stroke>
+			<s:SolidColorStroke id="borderStroke" weight="1" caps="square" color="#999999" color.normalWithFloatPromptError="#ff0000" color.normalFocusedWithFloatPromptError="#ff0000"/>
+		</s:stroke>
+	</s:Line>
+	
+	<s:Line left="0" right.focusedStates="0" bottom="0" id="focusedBorder">
+		<s:stroke>
+			<s:SolidColorStroke id="focusedBorderStroke" weight="2" caps="square" color="#5380D0" color.errorStates="#ff0000"/>
+		</s:stroke>
+	</s:Line>
+
+</s:SparkSkin>
