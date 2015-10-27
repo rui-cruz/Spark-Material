@@ -11,7 +11,7 @@ package spark.material.components
 	[SkinState("normalAndZero")]
 	[SkinState("disabledAndZero")]
 	
-	[Style(name="inkColor", type="uint", format="Color", inherit="yes", defaultValue="#ff6868")]
+	[Style(name="inkColor", type="uint", format="Color", inherit="yes")]
 	
 	public class HSlider extends spark.components.HSlider
 	{
@@ -58,7 +58,7 @@ package spark.material.components
 			
 			if(value < maximum)
 			{
-				skin.graphics.lineStyle(2, 0xb2b2b2);
+				skin.graphics.lineStyle(2, 0xb2b2b2, 1, false, "normal", "square");
 				skin.graphics.moveTo(thumb.x + thumb.width + (enabled ? 0 : 2), height*.5);
 				skin.graphics.lineTo(width, height*.5);
 			}
