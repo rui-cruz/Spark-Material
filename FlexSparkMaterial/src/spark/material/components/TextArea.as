@@ -3,13 +3,12 @@ package spark.material.components
 	import flash.display.InteractiveObject;
 	import flash.events.FocusEvent;
 	import flash.geom.Point;
-	
-	import mx.core.mx_internal;
+
+    import mx.core.mx_internal;
 	import mx.graphics.SolidColorStroke;
 	
 	import spark.components.TextArea;
-	import spark.material.skins.TextAreaWithScrollerSkin;
-	import spark.material.skins.TextAreaWithoutScrollerSkin;
+	import spark.material.skins.TextAreaSkin;
 	
 	use namespace mx_internal;
 	
@@ -32,28 +31,12 @@ package spark.material.components
 		{
 			super();
 			
-			if(!getStyle("skinClass")) {
-				// Set default skin (Without scrollbar)
-				setStyle("skinClass", TextAreaWithoutScrollerSkin);
-			}
-				
+			if(!getStyle("skinClass"))
+				setStyle("skinClass", TextAreaSkin);
+
 			setStyle("focusSkin", null);
 		}
-		
-		private var _enableScrolling:Boolean;
-		public function set enableScrolling(value:Boolean):void {
-			_enableScrolling = value;
-			if(value==true) {
-				// Replace default skin (With scrollbar)
-				setStyle("skinClass", TextAreaWithScrollerSkin);
-			}
-		} 
-		
-		public function get enableScrolling():Boolean { 
-			return _enableScrolling; 
-		}		
 
-		
 		private var showErrorSkin:Boolean;
 		mx_internal override function updateErrorSkin():void
 		{

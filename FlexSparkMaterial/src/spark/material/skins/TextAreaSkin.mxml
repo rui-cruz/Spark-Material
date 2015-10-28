@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:SparkSkin xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
-    xmlns:fb="http://ns.adobe.com/flashbuilder/2009" 
-    alpha.disabledStates="0.5" blendMode="normal" fontSize="16">
+             xmlns:components="spark.material.components.*"
+             alpha.disabledStates="0.5" blendMode="normal" fontSize="16">
 
     <fx:Metadata>
 	    [HostComponent("spark.material.components.TextArea")]
@@ -58,10 +58,11 @@
 			</s:Parallel>
 		</s:Transition>
 	</s:transitions>
-    
-	<s:RichEditableText id="textDisplay" verticalAlign="top" widthInChars="10" fontStyle="normal" color="#000000"
-						left="1" right="1" top="20" paddingBottom="3" lineThrough.disabledWithFloatPrompt="true" multiline="true"/>
-	
+
+	<s:Scroller id="scroller" left="1" right="1" bottom="10" top="20" skinClass="spark.material.skins.ScrollSkin" minViewportInset="0" measuredSizeIncludesScrollBars="false">
+		<components:RichEditableText id="textDisplay" color="#000000" lineThrough.disabledWithFloatPrompt="true"/>
+	</s:Scroller>
+
     <s:Label id="promptDisplay" maxDisplayedLines="1" left="1" cacheAsBitmap="true"
                 verticalAlign="middle" top.promptStates="20" top.floatPromptStates="1" fontStyle="normal"
                 mouseEnabled="false" mouseChildren="false" fontSize.floatPromptStates="12" lineThrough.disabledWithPrompt="true"

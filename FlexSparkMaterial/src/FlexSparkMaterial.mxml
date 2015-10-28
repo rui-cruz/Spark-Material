@@ -219,18 +219,10 @@
 						<s:FormItem label="TextInput" required="true">						
 							<components:TextInput id="firstName" prompt="First Name" width="50%" change="textInputValidator.validate()" focusOut="textInputValidator.validate()"/>
 						</s:FormItem>
-						<s:FormItem label="TextArea with Scroller" required="false" >
-							<s:layout>
-								<s:HorizontalLayout verticalAlign="top" />
-							</s:layout>
-							<components:TextArea prompt="Some Text" height="110" enableScrolling="true" width="50%" />
+						<s:FormItem label="TextArea" required="false" maxHeight="150">
+							<components:TextArea prompt="Some Text" width="100%"/>
+                            <s:Label text="maxHeight: 150px" fontSize="11" color="#ff6868" right="0"/>
 						</s:FormItem>
-						<s:FormItem label="TextArea without Scroller" required="false" >
-							<s:layout>
-								<s:HorizontalLayout verticalAlign="top" />
-							</s:layout>
-							<components:TextArea  prompt="Some Text" enableScrolling="false" width="50%" />
-						</s:FormItem>							
 						<s:FormItem label="DropdownList" required="true">
 							<s:layout>
 								<s:HorizontalLayout gap="10" verticalAlign="bottom"/>
