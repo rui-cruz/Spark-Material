@@ -66,6 +66,12 @@ package spark.material.components
 		{
 			if(instance == textDisplay)
 				textDisplay.removeEventListener(FocusEvent.MOUSE_FOCUS_CHANGE, onFocusChange);
+				
+			if(instance == scroller) {
+				if(height>0) {
+					scroller.height = height;
+				}
+			}				
 		}
 		
 		protected function onFocusChange(evt:FocusEvent):void
