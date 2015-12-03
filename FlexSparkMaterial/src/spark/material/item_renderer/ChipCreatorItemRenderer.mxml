@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				xmlns:s="library://ns.adobe.com/flex/spark" 
+				xmlns:mx="library://ns.adobe.com/flex/mx"
+				xmlns:materialspark="spark.material.components.*"
+				autoDrawBackground="false"
+				preinitialize="onPreinitialize()">
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			
+			import spark.components.TextInput;
+			import spark.material.events.ChipsEvent;
+			
+			protected function onPreinitialize():void {
+				//addEventListener("dataChange", onDataChange);
+			}
+			
+			protected function onDataChange(event:Event):void {       
+				
+			}  			
+			
+			protected function dispatchEnterEvent(event:FlexEvent):void {
+				dispatchEvent(new ChipsEvent(ChipsEvent.ADD,tITag.text,true));
+				//data = tI.text;
+				tITag.text = "";
+				
+			}
+		]]>
+	</fx:Script>
+	
+	<s:TextInput id="tITag" height="32" borderVisible="false" 
+				 fontSize="20" fontFamily="Roboto"
+				 prompt="Enter a tag"
+				 focusEnabled="false" creationComplete="tITag.setFocus()" 
+				 enter="dispatchEnterEvent(event)" />
+</s:ItemRenderer>
