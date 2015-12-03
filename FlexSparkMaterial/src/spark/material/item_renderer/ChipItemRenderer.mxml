@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				xmlns:s="library://ns.adobe.com/flex/spark" 
+				xmlns:mx="library://ns.adobe.com/flex/mx" 
+				xmlns:components="spark.material.components.*"
+				autoDrawBackground="false" height="32">
+	<fx:Script>
+		<![CDATA[
+			import spark.material.events.ChipsEvent;
+			
+			import flatspark.utils.AwesomeUtils;
+			
+			protected function dispatchClickEvent():void {
+				dispatchEvent(new ChipsEvent(ChipsEvent.REMOVE,data,true));
+			}
+		]]>
+	</fx:Script>
+	
+
+	
+	<s:Rect left="0" right="0" top="0" bottom="0" radiusX="16">
+		<s:fill>
+			<s:SolidColor color="0xE0E0E0"/>
+		</s:fill>
+	</s:Rect>
+	<s:Label text="{data}" fontFamily="Roboto" fontSize="20" color="0x424242" paddingLeft="12" paddingRight="30" verticalAlign="middle" verticalCenter="0"/>
+	<s:Label right="10" fontSize="20" fontFamily="FontAwesome" color="0x424242" text="{AwesomeUtils.fa_times}" 
+			 verticalAlign="middle" verticalCenter="0" buttonMode="true"
+			 click="dispatchClickEvent()"/>
+	
+</s:ItemRenderer>
