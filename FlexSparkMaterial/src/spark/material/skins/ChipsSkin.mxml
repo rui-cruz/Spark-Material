@@ -29,7 +29,7 @@
       @productversion Flex 4
 -->
 <s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
-		xmlns:materialspark="spark.material.components.*">
+		xmlns:layouts="spark.material.layouts.*">
 
     <fx:Metadata>
     <![CDATA[ 
@@ -53,7 +53,7 @@
     <!--- @copy spark.components.SkinnableDataContainer#dataGroup -->
     <s:DataGroup id="dataGroup" left="0" right="0" top="0" bottom="0"  minWidth="0" minHeight="0">
 		<s:layout>
-			<materialspark:FlowLayout gap="5" />
+			<layouts:FlowLayout gap="5" />
 		</s:layout>
     </s:DataGroup>
 	
