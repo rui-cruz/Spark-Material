@@ -304,6 +304,9 @@
 							<components:FloatingActionButton radius="35" iconFont="{AwesomeUtils.fa_camera}" styleName="indigo" />
 							<components:FloatingActionButton radius="40" iconFont="{AwesomeUtils.fa_comment}" styleName="amber" />
 						</s:FormItem>
+						<s:FormItem label="Chips">
+							<components:Chips id="chips" skinClass="spark.material.skins.ChipsSkin" width="400"  dataProvider="{new ArrayCollection}" />	
+						</s:FormItem>						
 					</s:Form>
 				</s:Group>				
 				<components:Button label="Material Reference Guide" horizontalCenter="0" bottom="15" styleName="primary-flat" 
