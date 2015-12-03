@@ -124,8 +124,10 @@
 
 	<fx:Script>
 		<![CDATA[
+			import mx.collections.ArrayCollection;
+			
 			import flatspark.utils.AwesomeUtils;
-
+			
 			import utils.MouseWheelEnabler;
 
 			private function initMouseWheel() : void
@@ -305,7 +307,7 @@
 							<components:FloatingActionButton radius="40" iconFont="{AwesomeUtils.fa_comment}" styleName="amber" />
 						</s:FormItem>
 						<s:FormItem label="Chips">
-							<components:Chips id="chips" skinClass="spark.material.skins.ChipsSkin" width="400"  dataProvider="{new ArrayCollection}" />	
+							<components:Chips id="chips" skinClass="spark.material.skins.ChipsSkin" width="400" height="400"  dataProvider="{new ArrayCollection}" />	
 						</s:FormItem>						
 					</s:Form>
 				</s:Group>				
