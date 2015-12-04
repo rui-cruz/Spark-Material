@@ -7,4 +7,6 @@ Flex spark based components and skins with Material design by google
 
 Note: This first commit is not optimized for mobile!
 
+Join [Spark Material](https://flexsparkmaterial.slack.com) community on Slack
+
 Enjoy :)
