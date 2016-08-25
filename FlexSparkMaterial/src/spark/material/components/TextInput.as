@@ -72,6 +72,7 @@ package spark.material.components
 		protected function onFocusChange(evt:FocusEvent):void
 		{
 			if(skin && skin.contains(evt.relatedObject)) return;
+			if(stage==null) return; // Quick fix to avoid null pointer errors
 			
 			var focusPoint:Point = new Point(stage.mouseX, stage.mouseY);
 			var objectsUnderPoint:Array = stage.getObjectsUnderPoint(focusPoint);
