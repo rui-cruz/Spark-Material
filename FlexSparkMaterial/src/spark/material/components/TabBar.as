@@ -7,6 +7,7 @@ package spark.material.components
     import spark.effects.animation.MotionPath;
     import spark.effects.animation.SimpleMotionPath;
     import spark.effects.easing.Sine;
+    import spark.material.skins.TabBarSkin;
     import spark.primitives.Line;
 
     public class TabBar extends spark.components.TabBar
@@ -17,6 +18,9 @@ package spark.material.components
         public function TabBar()
         {
             super();
+
+            if(!getStyle("skinClass"))
+                setStyle("skinClass", TabBarSkin);
         }
 
         override public function drawFocus(isFocused:Boolean):void

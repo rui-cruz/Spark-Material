@@ -12,14 +12,14 @@
 
 		@font-face {
 			src: url("spark/material/assets/fonts/Roboto.swf");
-			cff:false;
+			cff:true;
 			fontFamily: "Roboto";
 			fontStyle: normal;
 		}
 		
 		@font-face {
 			src: url("spark/material/assets/fonts/Roboto.swf");
-			cff:false;
+			cff:true;
 			fontFamily: "Roboto";
 			fontStyle: italic;
 		}
@@ -28,7 +28,7 @@
 			src: url("spark/material/assets/fonts/Roboto.swf");
 			fontFamily: "Roboto";
 			fontWeight: bold;
-			fontSharpness: 400;
+            fontSharpness: 400;
 			cff:true;
 		}
 		
@@ -38,9 +38,27 @@
 			fontStyle:normal;
 			color: #000000;
 			fontSize: 14;
-			modal-transparency-duration: 0;
+			modal-transparency-duration: 200;
+            modal-transparency-blur: 0;
+            modal-transparency: 0.6;
+            modal-transparency-color: #000000;
+		}
+
+        s|FormItem {
+            skinClass: ClassReference("spark.material.skins.FormItemSkin");
+            showErrorTip: false;
+        }
+		
+		components|DropDownColorPicker
+		{
+			skinClass: ClassReference("spark.material.skins.DropDownColorPickerSkin");
 		}
 		
+		components|HSVColorPicker
+		{
+			skinClass: ClassReference("spark.material.skins.HSliderSkin");
+		}
+
 		components|Button.primary
 		{
 			backgroundColor: #106cc8;
@@ -102,15 +120,9 @@
 			inkColor: #bababa;
 		}
 
-		s|FormItem {
-			skinClass: ClassReference("spark.material.skins.FormItemSkin");
-			showErrorTip: false;
-		}
-
 		components|TabBar {
-			skinClass: ClassReference("spark.material.skins.TabBarSkin");
+			selectionColor: #ffff8d;
 			backgroundColor: #00BCD4;
-			selectedTabColor: #ffff8d;
 			typographicCase: uppercase;
 			color: #ffffff;
 		}
@@ -118,7 +130,7 @@
 		components|ButtonBarButton {
 			inkColor: #ffff8d;
 			backgroundColor: #00BCD4;
-			selectedTabColor: #ffff8d;
+			selectionColor: #ffff8d;
 		}
 	</fx:Style>
 
@@ -126,17 +138,29 @@
 		<![CDATA[
 			import flatspark.utils.AwesomeUtils;
 
+			import spark.material.components.Alert;
+
 			import utils.MouseWheelEnabler;
 
 			private function initMouseWheel() : void
 			{
 				MouseWheelEnabler.init( stage );
 			}
+
+			private function validateAlert():void
+            {
+                var errors:Array = Validator.validateAll([alertMessageValidator, alertTitleValidator]);
+
+                if(errors.length == 0)
+				    Alert.show(alertMessage.text, alertTitle.text);
+			}
 		]]>
 	</fx:Script>
 
 	<fx:Declarations>
 		<mx:Validator id="textInputValidator" source="{firstName}" property="text"/>
+        <mx:Validator id="alertMessageValidator" source="{alertMessage}" property="text" requiredFieldError="Message is required."/>
+        <mx:Validator id="alertTitleValidator" source="{alertTitle}" property="text" requiredFieldError="Title is required."/>
 		<mx:NumberValidator id="dropdownListValidator" source="{dropdownlist}" property="selectedIndex" minValue="0" lowerThanMinError="This field is required"/>
 		<s:ArrayList id="cities">
 			<s:source>
@@ -216,6 +240,10 @@
 					</s:Rect>
 					<components:TabBar left="0" right="0" dataProvider="{tabs}"/>
 					<s:Form top="40" left="0" bottom="0" right="0">
+						<s:FormItem label="Color Picker">
+							<components:DropDownColorPicker />
+						</s:FormItem>
+						
 						<s:FormItem label="TextInput" required="true">						
 							<components:TextInput id="firstName" prompt="First Name" width="50%" change="textInputValidator.validate()" focusOut="textInputValidator.validate()"/>
 						</s:FormItem>
@@ -263,20 +291,20 @@
 							<components:RadioButton label="Option Two" groupName="options"/>
 							<components:RadioButton label="Disabled" groupName="options" enabled="false"/>
 							<components:RadioButton label="Disabled and Selected" enabled="false" selected="true"/>
-						</s:FormItem>
+						</s:FormItem>						
 						<s:FormItem label="Slider">
-                            <s:layout>
-                                <s:HorizontalLayout gap="20"/>
-                            </s:layout>
-                            <s:VGroup width="50%" horizontalAlign="center">
-                                <components:HSlider id="hSlider" value="{vSlider.value}" minimum="0" maximum="10" width="100%" stepSize="0"/>
-                                <components:VSlider id="vSlider" value="{hSlider.value}" minimum="0" maximum="10" stepSize="0"/>
-                            </s:VGroup>
-                            <s:VGroup width="50%" horizontalAlign="center">
-                                <components:HSlider value="{vSlider.value}" enabled="false" minimum="0" maximum="10" width="100%" stepSize="0"/>
-                                <components:VSlider value="{hSlider.value}" enabled="false" minimum="0" maximum="10" stepSize="0"/>
-                            </s:VGroup>
-                        </s:FormItem>
+							<s:layout>
+								<s:HorizontalLayout gap="20"/>
+							</s:layout>
+							<s:VGroup width="50%" horizontalAlign="center">
+								<components:HSlider id="hSlider" value="{vSlider.value}" minimum="0" maximum="10" width="100%" stepSize="0"/>
+								<components:VSlider id="vSlider" value="{hSlider.value}" minimum="0" maximum="10" stepSize="0"/>
+							</s:VGroup>
+							<s:VGroup width="50%" horizontalAlign="center">
+								<components:HSlider value="{vSlider.value}" enabled="false" minimum="0" maximum="10" width="100%" stepSize="0"/>
+								<components:VSlider value="{hSlider.value}" enabled="false" minimum="0" maximum="10" stepSize="0"/>
+							</s:VGroup>
+						</s:FormItem>
 						<s:FormItem label="Button">
 							<s:layout>
 								<s:HorizontalLayout gap="20"/>
@@ -304,6 +332,14 @@
 							<components:FloatingActionButton radius="35" iconFont="{AwesomeUtils.fa_camera}" styleName="indigo" />
 							<components:FloatingActionButton radius="40" iconFont="{AwesomeUtils.fa_comment}" styleName="amber" />
 						</s:FormItem>
+                        <s:FormItem label="Alert">
+                            <s:layout>
+                                <s:HorizontalLayout gap="20" verticalAlign="middle"/>
+                            </s:layout>
+                            <components:TextInput id="alertMessage" prompt="Message" text="You can specify some text in here." width="100%"/>
+                            <components:TextInput id="alertTitle" prompt="Title" text="This is an alert title"/>
+                            <components:Button label="Open" click="validateAlert()" styleName="primary"/>
+                        </s:FormItem>
 					</s:Form>
 				</s:Group>				
 				<components:Button label="Material Reference Guide" horizontalCenter="0" bottom="15" styleName="primary-flat" 
