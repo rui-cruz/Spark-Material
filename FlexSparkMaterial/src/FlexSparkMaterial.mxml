@@ -3,7 +3,8 @@
 			   xmlns:s="library://ns.adobe.com/flex/spark"
 			   xmlns:mx="library://ns.adobe.com/flex/mx"
 			   xmlns:components="spark.material.components.*"
-			   minWidth="955" minHeight="600" viewSourceURL="srcview/index.html">
+			   minWidth="955" minHeight="600" viewSourceURL="srcview/index.html"
+			   addedToStage="initMouseWheel()">
 	
 	<fx:Style>
 		@namespace components "spark.material.components.*";
@@ -138,6 +139,13 @@
 			import flatspark.utils.AwesomeUtils;
 
 			import spark.material.components.Alert;
+
+			import utils.MouseWheelEnabler;
+
+			private function initMouseWheel() : void
+			{
+				MouseWheelEnabler.init( stage );
+			}
 
 			private function validateAlert():void
             {
@@ -287,10 +295,16 @@
 						<s:FormItem label="Slider">
 							<s:layout>
 								<s:HorizontalLayout gap="20"/>
-							</s:layout>							
-							<components:HSlider id="slider" minimum="0" maximum="10" width="200" stepSize="0"/>
-							<components:HSlider enabled="false" value="{slider.value}" minimum="0" maximum="10" width="200" stepSize="0"/>
-						</s:FormItem>						
+							</s:layout>
+							<s:VGroup width="50%" horizontalAlign="center">
+								<components:HSlider id="hSlider" value="{vSlider.value}" minimum="0" maximum="10" width="100%" stepSize="0"/>
+								<components:VSlider id="vSlider" value="{hSlider.value}" minimum="0" maximum="10" stepSize="0"/>
+							</s:VGroup>
+							<s:VGroup width="50%" horizontalAlign="center">
+								<components:HSlider value="{vSlider.value}" enabled="false" minimum="0" maximum="10" width="100%" stepSize="0"/>
+								<components:VSlider value="{hSlider.value}" enabled="false" minimum="0" maximum="10" stepSize="0"/>
+							</s:VGroup>
+						</s:FormItem>
 						<s:FormItem label="Button">
 							<s:layout>
 								<s:HorizontalLayout gap="20"/>
