@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:components="spark.material.components.*">
+	
+	<!-- host component -->
+	<fx:Metadata>
+		[HostComponent("spark.material.components.DropDownColorPicker")]
+	</fx:Metadata>
+	
+	<!-- states -->
+	<s:states>
+		<s:State name="normal" />
+		<s:State name="open" />
+		<s:State name="disabled" />
+	</s:states>
+	
+	<s:PopUpAnchor id="popUp" displayPopUp.normal="false" displayPopUp.open="true" includeIn="open" left="0" right="0" top="0" bottom="0" itemDestructionPolicy="auto"
+				   popUpPosition="below" popUpWidthMatchesAnchorWidth="false">
+		
+		<s:Group id="dropDown" hasFocusableChildren="false">
+			<s:RectangularDropShadow id="dropShadow" blurX="15" blurY="15" alpha="0.4" distance="4" angle="90" color="#000000" left="0" top="0" right="0" bottom="0"/>
+			<s:Rect left="0" right="0" top="0" bottom="0">
+				<s:fill>
+					<s:SolidColor color="#fbfbfb"/>
+				</s:fill>
+				<s:stroke>
+					<s:SolidColorStroke color="#cccccc" />
+				</s:stroke>
+			</s:Rect>
+			
+			<s:VGroup left="10" right="10" bottom="10" top="-5">
+				<s:HGroup verticalAlign="bottom" gap="0">
+					<s:Group id="startColorGroup" mouseChildren="false" mouseEnabledWhereTransparent="true">
+						<s:Rect width="38" height="25">
+							<s:fill>
+								<s:SolidColor color="{hostComponent.startColor}"/>
+							</s:fill>
+						</s:Rect>
+					</s:Group>
+					
+					<s:Rect width="38" height="25">
+						<s:fill>
+							<s:SolidColor color="{hostComponent.selectedColor}"/>
+						</s:fill>
+					</s:Rect>
+					
+					<s:Label text="#" paddingBottom="7" verticalAlign="middle" paddingLeft="8"/>
+					<components:TextInput text="{colorPicker.hex}" maxChars="6" width="56" enter="colorPicker.hex=event.target.text" 
+										  focusOut="colorPicker.hex=event.target.text" paste="colorPicker.hex=event.target.text" restrict="[0-9abcdef]"/>
+				</s:HGroup>
+				<components:HSVColorPicker id="colorPicker"/>
+				<components:RGBHSlider id="hueSlider" width="150" value="{colorPicker.hue}" change="colorPicker.hue=int(hueSlider.value)"/>
+			</s:VGroup>
+		</s:Group>
+		
+	</s:PopUpAnchor>
+	
+	<s:Button id="openButton" left="0" right="0" top="0" bottom="0" focusEnabled="false" tabEnabled="false" skinClass="spark.material.skins.DropDownColorPickerButtonSkin"/>
+	
+	<s:Line left="4" right="4" top="4" bottom="4" visible="{hostComponent.selectedColor > 16777215}">
+		<s:stroke>
+			<s:SolidColorStroke color="#ff0000"/>
+		</s:stroke>
+	</s:Line>
+	
+</s:Skin>

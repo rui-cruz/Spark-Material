@@ -47,6 +47,16 @@
             skinClass: ClassReference("spark.material.skins.FormItemSkin");
             showErrorTip: false;
         }
+		
+		components|DropDownColorPicker
+		{
+			skinClass: ClassReference("spark.material.skins.DropDownColorPickerSkin");
+		}
+		
+		components|HSVColorPicker
+		{
+			skinClass: ClassReference("spark.material.skins.HSliderSkin");
+		}
 
 		components|Button.primary
 		{
@@ -222,6 +232,10 @@
 					</s:Rect>
 					<components:TabBar left="0" right="0" dataProvider="{tabs}"/>
 					<s:Form top="40" left="0" bottom="0" right="0">
+						<s:FormItem label="Color Picker">
+							<components:DropDownColorPicker />
+						</s:FormItem>
+						
 						<s:FormItem label="TextInput" required="true">						
 							<components:TextInput id="firstName" prompt="First Name" width="50%" change="textInputValidator.validate()" focusOut="textInputValidator.validate()"/>
 						</s:FormItem>
@@ -269,11 +283,11 @@
 							<components:RadioButton label="Option Two" groupName="options"/>
 							<components:RadioButton label="Disabled" groupName="options" enabled="false"/>
 							<components:RadioButton label="Disabled and Selected" enabled="false" selected="true"/>
-						</s:FormItem>
+						</s:FormItem>						
 						<s:FormItem label="Slider">
 							<s:layout>
 								<s:HorizontalLayout gap="20"/>
-							</s:layout>
+							</s:layout>							
 							<components:HSlider id="slider" minimum="0" maximum="10" width="200" stepSize="0"/>
 							<components:HSlider enabled="false" value="{slider.value}" minimum="0" maximum="10" width="200" stepSize="0"/>
 						</s:FormItem>						
