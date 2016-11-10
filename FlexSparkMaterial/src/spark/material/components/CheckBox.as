@@ -8,6 +8,8 @@ package spark.material.components
 	import spark.components.Group;
 	import spark.material.skins.CheckBoxSkin;
 	
+	[Style(name="accentColor", type="uint", format="Color", inherit="yes")]
+	
 	public class CheckBox extends spark.components.CheckBox
 	{
 		[SkinPart(required="true")]
@@ -35,7 +37,7 @@ package spark.material.components
 		
 		override protected function focusOutHandler(event:FocusEvent):void
 		{
-			super.focusInHandler(event);
+			super.focusOutHandler(event);
 			destroyRipples();
 		}
 		

@@ -47,11 +47,8 @@
       </s:fill>
     </s:Rect>
 
-    <s:Group id="contents">
-      <s:layout>
-        <s:VerticalLayout gap="27" horizontalAlign="justify"/>
-      </s:layout>
-
+    <s:VGroup id="contents" gap="27" horizontalAlign="justify" width="100%">
+     
       <s:Group id="topGroup" mask="{topGroupMask}">
         <s:HGroup right="27" top="27" left="27" verticalAlign="middle" gap="10">
           <s:Group id="iconGroup" visible="false" includeInLayout="false"/>
@@ -63,7 +60,7 @@
         <s:Label id="messageDisplay" fontSize="15" verticalAlign="middle" paddingLeft="17" paddingRight="17" paddingBottom="27" digitWidth="default"/>
         <s:HGroup id="buttonGroup" width="100%" gap="10" horizontalAlign="right"/>
       </s:VGroup>
-    </s:Group>
+    </s:VGroup>
 
     <s:filters>
       <s:DropShadowFilter alpha=".3" angle="90" distance="5" blurX="20" blurY="20"/>

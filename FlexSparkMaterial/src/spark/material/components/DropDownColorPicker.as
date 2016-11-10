@@ -12,11 +12,13 @@ package spark.material.components
 	import spark.components.supportClasses.ButtonBase;
 	import spark.components.supportClasses.DropDownController;
 	import spark.events.DropDownEvent;
+	import spark.material.skins.DropDownColorPickerSkin;
 	
 	use namespace mx_internal;
 	
 	[Event(name="close", type="spark.events.DropDownEvent")]
 	[Event(name="open", type="spark.events.DropDownEvent")]
+	[Event(name="change", type="mx.events.ColorPickerEvent")]
 	
 	[SkinState("open")]
 	
@@ -40,6 +42,9 @@ package spark.material.components
 		public function DropDownColorPicker()
 		{
 			super();
+			
+			if(!getStyle("skinClass"))
+				setStyle("skinClass", DropDownColorPickerSkin);
 			
 			dropDownController = new DropDownController();
 		}

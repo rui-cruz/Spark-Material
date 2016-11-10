@@ -241,7 +241,7 @@
 					<components:TabBar left="0" right="0" dataProvider="{tabs}"/>
 					<s:Form top="40" left="0" bottom="0" right="0">
 						<s:FormItem label="Color Picker">
-							<components:DropDownColorPicker />
+							<components:DropDownColorPicker selectedColor="#ffff8d"/>
 						</s:FormItem>
 						
 						<s:FormItem label="TextInput" required="true">						

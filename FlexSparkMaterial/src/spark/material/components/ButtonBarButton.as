@@ -48,7 +48,7 @@ package spark.material.components
 
         override protected function focusOutHandler(event:FocusEvent):void
         {
-            super.focusInHandler(event);
+            super.focusOutHandler(event);
             hasFocus = false;
             invalidateSkinState();
         }

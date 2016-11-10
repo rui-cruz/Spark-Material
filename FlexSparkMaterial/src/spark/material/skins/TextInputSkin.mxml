@@ -65,7 +65,7 @@
     <s:Label id="promptDisplay" maxDisplayedLines="1" left="1" cacheAsBitmap="true"
                 verticalAlign="middle" top.promptStates="20" top.floatPromptStates="1" fontStyle="normal"
                 mouseEnabled="false" mouseChildren="false" fontSize.floatPromptStates="12" lineThrough.disabledWithPrompt="true"
-                includeIn="promptStates,floatPromptStates" color="#999999" color.focusedStates="#5380D0" color.errorStates="#ff0000"/>
+                includeIn="promptStates,floatPromptStates" color="#999999" color.focusedStates="{getStyle('accentColor')}" color.errorStates="#ff0000"/>
 
 	<s:Line left="0" right="0" bottom="0">
 		<s:stroke>
@@ -75,7 +75,7 @@
 	
 	<s:Line left="0" right.focusedStates="0" bottom="0" id="focusedBorder">
 		<s:stroke>
-			<s:SolidColorStroke id="focusedBorderStroke" weight="2" caps="square" color="#5380D0" color.errorStates="#ff0000"/>
+			<s:SolidColorStroke id="focusedBorderStroke" weight="2" caps="square" color="{getStyle('accentColor')}" color.errorStates="#ff0000"/>
 		</s:stroke>
 	</s:Line>
 	

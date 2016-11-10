@@ -9,6 +9,7 @@ package spark.material.components
 	import spark.material.skins.RadioButtonSkin;
 	
 	[Style(name="inkColor", type="uint", format="Color", inherit="yes", defaultValue="#ff6868")]
+	[Style(name="accentColor", type="uint", format="Color", inherit="yes", defaultValue="#5380D0")]
 	
 	public class RadioButton extends spark.components.RadioButton
 	{
@@ -37,7 +38,7 @@ package spark.material.components
 		
 		override protected function focusOutHandler(event:FocusEvent):void
 		{
-			super.focusInHandler(event);
+			super.focusOutHandler(event);
 			destroyRipples();
 		}
 		

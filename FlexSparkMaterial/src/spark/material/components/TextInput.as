@@ -20,6 +20,7 @@ package spark.material.components
 	[SkinState("disabledWithFloatPrompt")]
 	[SkinState("disabledWithFloatPromptError")]
 	
+	[Style(name="accentColor", type="uint", format="Color", inherit="yes")]
 	[Style(name="nofloat", type="Boolean", inherit="no")]
 	
 	public class TextInput extends spark.components.TextInput
@@ -67,11 +68,13 @@ package spark.material.components
 		{
 			if(instance == textDisplay)
 				textDisplay.removeEventListener(FocusEvent.MOUSE_FOCUS_CHANGE, onFocusChange);
+			
+			super.partRemoved(partName, instance);
 		}
 						
 		protected function onFocusChange(evt:FocusEvent):void
 		{
-			if(skin && skin.contains(evt.relatedObject)) return;
+			if(!stage || (skin && skin.contains(evt.relatedObject))) return;
 			
 			var focusPoint:Point = new Point(stage.mouseX, stage.mouseY);
 			var objectsUnderPoint:Array = stage.getObjectsUnderPoint(focusPoint);

@@ -52,16 +52,15 @@ package spark.material.components
 		public function DropDownList()
 		{
 			super();
-						
+			
 			if(!getStyle("skinClass"))
 				setStyle("skinClass", DropDownListSkin);
 			
 			setStyle("focusSkin", null);
 			
-			addEventListener(DropDownEvent.CLOSE, onDropDownClose);
 			addEventListener(DropDownEvent.OPEN, onDropDownOpen);
 		}
-				
+		
 		override protected function partAdded(partName:String, instance:Object):void
 		{
 			super.partAdded(partName, instance);
@@ -74,6 +73,16 @@ package spark.material.components
 			{
 				popUp.addEventListener(FlexEvent.CREATION_COMPLETE, onDropDownAdded);
 			}
+		}
+		
+		override protected function partRemoved(partName:String, instance:Object):void
+		{
+			if(instance == popUp)
+			{
+				popUp.removeEventListener(FlexEvent.CREATION_COMPLETE, onDropDownAdded);
+			}
+			
+			super.partRemoved(partName, instance);
 		}
 
 		override protected function keyDownHandler(event:KeyboardEvent):void
@@ -157,35 +166,32 @@ package spark.material.components
 				{
 					labelDisplay.text = LabelUtil.itemToLabel(displayItem, labelField, labelFunction);
 					labelDisplay["visible"] = true;
+					
+					if(!isDropDownOpen && skin.currentState.indexOf("WithFloatPrompt") == -1)
+						skin.currentState += "WithFloatPrompt";
 				}
 				else
 				{
 					if(labelDisplay["visible"] && skin.currentState.indexOf("WithFloatPrompt") != -1)
 						skin.currentState = skin.currentState.slice(0,skin.currentState.indexOf("WithFloatPrompt"));
 										
-					labelDisplay["visible"] = false;
-					if(promptDisplay)
-						promptDisplay.text = prompt;					
+					labelDisplay["visible"] = false;				
 				}
 			}
 			
-			if(focusManager && focusManager.getFocus() != focusManager.findFocusManagerComponent(this) && skin.currentState.indexOf("Focused") != -1)
+			if(promptDisplay)
+				promptDisplay.text = prompt;
+			
+			if(skin && focusManager && focusManager.getFocus() != focusManager.findFocusManagerComponent(this) && skin.currentState.indexOf("Focused") != -1)
 				skin.currentState = skin.currentState.substr(0,skin.currentState.indexOf("Focused")).substr(skin.currentState.indexOf("Focused"), skin.currentState.length);
 		}
 
 		protected function onDropDownOpen(evt:DropDownEvent):void
 		{
+			validateProperties();
+			
 			if(skin.currentState.indexOf("open") == -1)
 				invalidateSkinState();
-		}
-
-		protected function onDropDownClose(evt:DropDownEvent):void
-		{
-			var focusPoint:Point = new Point(stage.mouseX, stage.mouseY);
-			var objectsUnderPoint:Array = stage.getObjectsUnderPoint(focusPoint);
-			var lastElement:Object = objectsUnderPoint.pop();
-			if(lastElement && lastElement.hasOwnProperty("parent"))
-				stage.focus = InteractiveObject(lastElement["parent"] || lastElement);
 		}
 
 		override protected function focusInHandler(event:FocusEvent):void
@@ -196,8 +202,15 @@ package spark.material.components
 		
 		override protected function focusOutHandler(event:FocusEvent):void
 		{
-			super.focusInHandler(event);
-			invalidateSkinState();
+			if(focusManager && focusManager.getFocus() != focusManager.findFocusManagerComponent(this))
+			{
+				super.focusOutHandler(event);
+				invalidateSkinState();
+			}
+			else
+			{
+				event.stopPropagation();
+			}
 		}
 		
 		override protected function getCurrentSkinState():String
@@ -211,17 +224,17 @@ package spark.material.components
 				if(openButton)
 					openButton.skin.currentState = "down";
 				
-				if(selectedIndex != -1)
+				if(selectedIndex > -1)
 					skinState += "WithFloatPrompt";
 			}
-			else if(prompt != null && prompt != "" && selectedIndex != -1)
+			else if(prompt != null && prompt != "" && (selectedIndex != -1 || (selectedItem != null && selectedItem != undefined)))
 			{
 				skinState += "WithFloatPrompt";
 			}
 			
 			if(showErrorSkin)
 				skinState += "Error";
-
+			
 			return skinState;
 		}
 	}

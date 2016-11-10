@@ -3,13 +3,14 @@ package spark.material.components
 	import flash.events.Event;
 	import flash.events.FocusEvent;
 	import flash.events.MouseEvent;
-	
+		
 	import spark.components.Button;
 	import spark.components.Group;
 	import spark.material.skins.ButtonSkin;
 	import spark.material.skins.FlatButtonSkin;
 	
-	[Style(name="inkColor", type="uint", format="Color", inherit="yes")]
+	[Style(name="inkColor", type="uint", format="Color", inherit="yes", defaultValue="#999999")]
+	[Style(name="backgroundColor", type="uint", format="Color", inherit="no", defaultValue="#fafafa")]
 	[Style(name="buttonStyle", type="String", enumeration="flat,raised", inherit="yes")]
 	
 	public class Button extends spark.components.Button
@@ -29,12 +30,12 @@ package spark.material.components
 			if(!getStyle("skinClass"))
 				setStyle("skinClass", ButtonSkin);
 		}
-				
+						
 		override protected function attachSkin():void
 		{
 			if(getStyle("buttonStyle") == "flat")
 				setStyle("skinClass", FlatButtonSkin);
-			
+						
 			if(getStyle("inkColor") != undefined)
 				inkColor = getStyle("inkColor");
 			
@@ -46,13 +47,14 @@ package spark.material.components
 		{
 			super.focusInHandler(event);
 			
-			focusManager.hideFocus();
+			if(focusManager)
+				focusManager.hideFocus();
 			invalidateSkinState();
 		}
 		
 		override protected function focusOutHandler(event:FocusEvent):void
 		{
-			super.focusInHandler(event);
+			super.focusOutHandler(event);
 			hasFocus = false;
 			invalidateSkinState();
 		}

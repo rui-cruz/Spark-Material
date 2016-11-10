@@ -65,11 +65,12 @@
                
 		<s:Rect width="16" height="16" radiusX="1">
 			<s:stroke>
-				<s:SolidColorStroke caps="none" color="#757575" color.disabledStates="#757575" color.upAndSelected="#ff6868" color.downAndSelected="#ff6868" color.overAndSelected="#ff6868"
-									joints="round" miterLimit="4" weight="2"/>
+				<s:SolidColorStroke caps="none" color="{getStyle('color')}" color.disabledStates="#757575" 
+									color.upAndSelected="{getStyle('accentColor')}" color.downAndSelected="{getStyle('accentColor')}" 
+									color.overAndSelected="{getStyle('accentColor')}" joints="round" miterLimit="4" weight="2"/>
 			</s:stroke>
 			<s:fill>
-				<s:SolidColor id="checkBg" color="#ff6868" color.disabledStates="#757575" alpha="0" alpha.selectedStates="1"/>
+				<s:SolidColor id="checkBg" color="{getStyle('accentColor')}" color.disabledStates="#757575" alpha="0" alpha.selectedStates="1"/>
 			</s:fill>
 		</s:Rect>
     	
@@ -89,10 +90,7 @@
 		<s:Group id="inkHolder" verticalCenter="0" horizontalCenter="0" width="0" height="0" />
     </s:Group>
 
-    <s:Label id="labelDisplay"
-             textAlign="start" fontSize="16"
-             verticalAlign="middle" color.disabledStates="#999999"
-             maxDisplayedLines="1" lineThrough.disabledStates="true"
-             left="25" right="0" top="3" bottom="3" verticalCenter="2" />
+    <s:Label id="labelDisplay" textAlign="start" fontSize="16" verticalAlign="middle" color.disabledStates="#999999" color="{getStyle('color')}"
+             maxDisplayedLines="1" lineThrough.disabledStates="true" left="25" right="0" top="3" bottom="3" verticalCenter="2" />
 
 </s:SparkSkin>

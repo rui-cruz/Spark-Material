@@ -52,7 +52,7 @@ package spark.material.components
 		
 		override protected function focusOutHandler(event:FocusEvent):void
 		{
-			super.focusInHandler(event);
+			super.focusOutHandler(event);
 			destroyRipples();
 		}
 		
@@ -66,7 +66,7 @@ package spark.material.components
 			
 			if(event.type == MouseEvent.MOUSE_DOWN)
 			{
-				currentRipple = new InkRipple(0,0,60,60);
+				currentRipple = new InkRipple(0,0,40,40);
 				currentRipple.owner = inkHolder;
 				inkHolder.addElement(currentRipple);
 				

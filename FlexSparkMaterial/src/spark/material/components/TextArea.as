@@ -83,6 +83,8 @@ package spark.material.components
 		{
 			if(instance == textDisplay)
 				textDisplay.removeEventListener(FocusEvent.MOUSE_FOCUS_CHANGE, onFocusChange);
+			
+			super.partRemoved(partName, instance);
 		}
 		
 		protected function onFocusChange(evt:FocusEvent):void

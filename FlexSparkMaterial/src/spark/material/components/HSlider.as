@@ -45,6 +45,8 @@ package spark.material.components
 		{
 			super.updateSkinDisplayList();
 			
+			if(!inkHolder) return;
+			
 			inkHolder.x = thumb.x + thumb.width*.5;
 			
 			skin.graphics.clear();
@@ -92,6 +94,18 @@ package spark.material.components
 			destroyRipples();
 			currentRipple = new InkRipple(0, 0, 40, getStyle("inkColor"));
 			currentRipple.owner = inkHolder;
+			currentRipple.isMouseDown = false;
+			inkHolder.addElement(currentRipple);
+		}
+		
+		override protected function track_mouseDownHandler(event:MouseEvent):void
+		{
+			super.track_mouseDownHandler(event);
+			
+			destroyRipples();
+			currentRipple = new InkRipple(0, 0, 40, getStyle("inkColor"));
+			currentRipple.owner = inkHolder;
+			currentRipple.isMouseDown = false;
 			inkHolder.addElement(currentRipple);
 		}
 		
@@ -99,12 +113,16 @@ package spark.material.components
 		{
 			super.thumb_mouseDownHandler(event);
 			
-			if(currentRipple)
-				currentRipple.isMouseDown = false;
-			
-			currentRipple = new InkRipple(0,0,40,40);
-			currentRipple.owner = inkHolder;
-			inkHolder.addElement(currentRipple);
+			if(currentRipple && inkHolder.numElements > 0)
+			{
+				currentRipple.isMouseDown = true;
+			}
+			else
+			{
+				currentRipple = new InkRipple(0,0,40,40);
+				currentRipple.owner = inkHolder;
+				inkHolder.addElement(currentRipple);
+			}
 			
 			systemManager.getSandboxRoot().addEventListener(MouseEvent.MOUSE_UP, systemManager_mouseUpHandler, true);
 		}
@@ -125,7 +143,7 @@ package spark.material.components
 		
 		override protected function focusOutHandler(event:FocusEvent):void
 		{
-			super.focusInHandler(event);
+			super.focusOutHandler(event);
 			destroyRipples();
 		}
 		

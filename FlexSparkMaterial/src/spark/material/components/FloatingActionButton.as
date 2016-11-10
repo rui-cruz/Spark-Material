@@ -58,13 +58,14 @@ package spark.material.components
 		{
 			super.focusInHandler(event);
 			
-			focusManager.hideFocus();
+			if(focusManager)
+				focusManager.hideFocus();
 			invalidateSkinState();
 		}
 		
 		override protected function focusOutHandler(event:FocusEvent):void
 		{
-			super.focusInHandler(event);
+			super.focusOutHandler(event);
 			hasFocus = false;
 			invalidateSkinState();
 		}
